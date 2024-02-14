@@ -8,7 +8,13 @@
 package enums;
 
 public enum StatusMatricula {
-    ATIVO,
-    TRANCADO,
-    FORMADO
+    ATIVO(1),
+    TRANCADO(2),
+    FORMADO(3);
+
+    private final int valorMatricula;
+
+    StatusMatricula(int valorMatricula) {
+        this.valorMatricula = valorMatricula;
+    }
 }

@@ -8,7 +8,14 @@
 package enums;
 
 public enum StatusNivel {
-    INICIANTE,
-    EXPERIENTE,
-    AVANCADO
+    INICIANTE(1),
+    EXPERIENTE(2),
+    AVANCADO(3);
+
+    private final int valorNivel;
+
+    StatusNivel(int valorNivel) {
+        this.valorNivel = valorNivel;
+    }
+
 }
