@@ -15,6 +15,16 @@ public class Teacher {
     }
     // </editor-fold>
 
+    // <editor-fold desc="ToString">
+    @Override
+    public String toString() {
+        return "Teacher: " +
+                "Name: " + name +
+                ", age: " + age +
+                ", employmentYears: " + employmentYears;
+    }
+    // </editor-fold>
+
     // <editor-fold desc="methods">
     public String getName() {
         return name;

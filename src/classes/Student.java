@@ -16,6 +16,15 @@ public class Student {
     }
     // </editor-fold>
 
+    // <editor-fold desc="ToString">
+    @Override
+    public String toString() {
+        return "Student: "+
+                "name: "+name +
+                ", course: "+ courses;
+    }
+    // </editor-fold>
+
     // <editor-fold desc="methods">
 
     /*

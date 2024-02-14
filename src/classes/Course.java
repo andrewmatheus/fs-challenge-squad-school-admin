@@ -13,6 +13,15 @@ public class Course {
     }
     // </editor-fold>
 
+    // <editor-fold desc="ToString">
+    @Override
+    public String toString() {
+        return "Course: "+
+                "name; "+name +
+                ", teacher: "+teacher;
+    }
+    // </editor-fold>
+
     // <editor-fold desc="methods">
     /*
      * Method getName - return name course
