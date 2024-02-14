@@ -60,7 +60,7 @@ public class Main {
         System.out.println("\nDirector Information:");
         System.out.println("Name: " + director.getName());
         System.out.println("Salary: $" + director.getSalary());
-        System.out.println("Years as Director: " + director.getTimeWork());
+        System.out.println("Years as Director: " + director.getEmploymentYears());
 
         // Displaying teacher information
         System.out.println("\nTeacher Information:");
