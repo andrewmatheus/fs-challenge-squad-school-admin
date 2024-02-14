@@ -6,14 +6,14 @@ import java.util.List;
 public class Class {
     // <editor-fold desc="Attributes">
     private List<Student> students;
-    private int age;
+    private int year;
     private Course course;
     // </editor-fold>
 
     // <editor-fold desc="Constructor">
-    public Class(int age, Course course) {
+    public Class(int year, Course course) {
         this.students = new ArrayList<>();
-        this.age = age;
+        this.year = year;
         this.course = course;
     }
     // </editor-fold>
@@ -35,10 +35,26 @@ public class Class {
      * Method listStudents - has the responsibility of listing course students
      * */
     public void listStudents() {
-        System.out.println("Alunos da turma " + this.age + " do curso " + course.getName() + ":");
+        System.out.println("Alunos da turma " + this.year + " do curso " + course.getName() + ":");
         for (Student student : students) {
             System.out.println("- " + student.getName());
         }
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
     // </editor-fold>
 }

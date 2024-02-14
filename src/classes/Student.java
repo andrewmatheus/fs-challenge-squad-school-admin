@@ -25,6 +25,10 @@ public class Student {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     /*
     * Method addCourse - is responsible for adding a new course to the list
     * */
