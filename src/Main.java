@@ -1,14 +1,12 @@
+import classes.*;
 import classes.Class;
-import classes.Course;
-import classes.Student;
-import classes.Teacher;
 
 public class Main {
     public static void main(String[] args) {
         // Usage example
 
         // Creating a teacher
-        Teacher teacher = new Teacher("André", 30, 10);
+        Teacher teacher = new Teacher("André", 30, 10, 25000.00);
 
         // Creating a course
         Course course = new Course("BackEnd-Java", teacher);
@@ -38,5 +36,41 @@ public class Main {
         System.out.println("\n+---------------------------+");
         studentTwo.listCourses();
 
+        // Testing Employee and Director classes
+        System.out.println("\nTesting Employee and Director classes:");
+
+        // Creating an Employee
+        Employee employee = new Employee("John Doe", 50000.00);
+
+        // Promoting the employee
+        employee.promote();
+
+        // Displaying employee information
+        System.out.println("\nEmployee Information:");
+        System.out.println("Name: " + employee.getName());
+        System.out.println("Salary: $" + employee.getSalary());
+
+        // Creating a Director
+        Director director = new Director("Jane Smith", 60000.00, 5);
+
+        // Promoting the director
+        director.promote();
+
+        // Displaying director information
+        System.out.println("\nDirector Information:");
+        System.out.println("Name: " + director.getName());
+        System.out.println("Salary: $" + director.getSalary());
+        System.out.println("Years as Director: " + director.getEmploymentYears());
+
+        // Displaying teacher information
+        System.out.println("\nTeacher Information:");
+        System.out.println("Name: " + teacher.getName());
+        System.out.println("Age: " + teacher.getAge());
+        System.out.println("Years of Employment: " + teacher.getEmploymentYears());
+        System.out.println("Salary: $" + teacher.getSalary());
+
+
     }
+
+
 }

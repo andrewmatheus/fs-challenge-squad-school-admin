@@ -1,27 +1,20 @@
 package classes;
 
-public class Teacher {
-    // <editor-fold desc="Attributes">
-    private String name;
+public class Teacher extends Employee{
+
     private int age;
     private int employmentYears;
-    // </editor-fold>
 
-    // <editor-fold desc="Constructor">
     public Teacher(String name, int age, int employmentYears) {
-        this.name = name;
+            super(name, 0);
+            this.age = age;
+            this.employmentYears = employmentYears;
+        }
+
+    public Teacher(String name, int age, int timeWork, double salary) {
+        super(name, salary);
         this.age = age;
         this.employmentYears = employmentYears;
-    }
-    // </editor-fold>
-
-    // <editor-fold desc="methods">
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getAge() {
@@ -39,5 +32,5 @@ public class Teacher {
     public void setEmploymentYears(int employmentYears) {
         this.employmentYears = employmentYears;
     }
-    // </editor-fold>
+
 }
