@@ -18,6 +18,16 @@ public class Class {
     }
     // </editor-fold>
 
+    // <editor-fold desc="ToString">
+    @Override
+    public String toString() {
+        return "Turma: " +
+                "Ano: " + year +
+                ", Curso: " + course.getName() +
+                ", Alunos: " + students;
+    }
+    // </editor-fold>
+
     // <editor-fold desc="methods">
     /*
      * Method addStudent - is responsible for adding a new student to the list

@@ -1,28 +1,27 @@
 package classes;
 
-public class Teacher {
-    // <editor-fold desc="Attributes">
-    private String name;
+public class Teacher extends Employee {
     private int age;
-    private int employmentYears;
-    // </editor-fold>
 
-    // <editor-fold desc="Constructor">
-    public Teacher(String name, int age, int employmentYears) {
-        this.name = name;
+    public Teacher(String name, int age, double salary, int employmentYears) {
+        super(name, salary, employmentYears);
         this.age = age;
-        this.employmentYears = employmentYears;
+    }
+
+    public Teacher(String name, int age, double salary) {
+        super(name, salary);
+        this.age = age;
+    }
+
+    // <editor-fold desc="ToString">
+    @Override
+    public String toString() {
+        return "Professor: " +
+                "Nome: " + getName() +
+                ", Idade: " + age +
+                ", Anos de trabalho: " + getEmploymentYears();
     }
     // </editor-fold>
-
-    // <editor-fold desc="methods">
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public int getAge() {
         return age;
@@ -31,13 +30,4 @@ public class Teacher {
     public void setAge(int age) {
         this.age = age;
     }
-
-    public int getEmploymentYears() {
-        return employmentYears;
-    }
-
-    public void setEmploymentYears(int employmentYears) {
-        this.employmentYears = employmentYears;
-    }
-    // </editor-fold>
 }
