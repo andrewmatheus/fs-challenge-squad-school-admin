@@ -5,6 +5,11 @@ public class Teacher extends Employee{
     private int age;
     private int employmentYears;
 
+    public Teacher(String name, int employmentYears) {
+        super(name, 0);
+        this.employmentYears = employmentYears;
+    }
+
     public Teacher(String name, int age, int employmentYears) {
             super(name, 0);
             this.age = age;

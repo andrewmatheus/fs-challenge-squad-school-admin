@@ -4,12 +4,20 @@ public class Course {
     // <editor-fold desc="Attributes">
     private String name;
     private Teacher teacher;
+    private String descriptionCourse; //
     // </editor-fold>
 
     // <editor-fold desc="Constructor">
     public Course(String name, Teacher teacher) {
         this.name = name;
         this.teacher = teacher;
+    }
+
+    //overload
+    public Course(String name, Teacher teacher, String descriptionCourse) {
+        this.name = name;
+        this.teacher = teacher;
+        this.descriptionCourse = descriptionCourse;
     }
     // </editor-fold>
 
@@ -31,6 +39,15 @@ public class Course {
 
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
+    }
+
+
+    public String getDescriptionCourse() {
+        return descriptionCourse;
+    }
+
+    public void setDescriptionCourse(String descriptionCourse) {
+        this.descriptionCourse = descriptionCourse;
     }
     // </editor-fold>
 }

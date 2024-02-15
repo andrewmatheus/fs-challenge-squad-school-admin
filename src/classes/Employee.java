@@ -5,6 +5,11 @@ public class Employee implements IEmployee {
     private String name;
     private double salary;
 
+
+    //overload
+    public Employee(String name) {
+        this.name = name;
+    }
     // Constructor
     public Employee(String name, double salary) {
         this.name = name;
@@ -22,7 +27,6 @@ public class Employee implements IEmployee {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
