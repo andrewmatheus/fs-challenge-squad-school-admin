@@ -13,6 +13,16 @@ public class Teacher extends Employee {
         this.age = age;
     }
 
+    // <editor-fold desc="ToString">
+    @Override
+    public String toString() {
+        return "Professor: " +
+                "Nome: " + getName() +
+                ", Idade: " + age +
+                ", Anos de trabalho: " + getEmploymentYears();
+    }
+    // </editor-fold>
+
     public int getAge() {
         return age;
     }

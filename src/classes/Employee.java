@@ -18,6 +18,15 @@ public class Employee implements IEmployee {
         this.employmentYears = 0;
     }
 
+    // <editor-fold desc="ToString">
+    @Override
+    public String toString() {
+        return "Funcionário: " +
+                "Nome: " + name +
+                ", Salário: " + salary;
+    }
+    // </editor-fold>
+
     // Implementing the promote method from the IEmployee interface
     @Override
     public void promote() {
