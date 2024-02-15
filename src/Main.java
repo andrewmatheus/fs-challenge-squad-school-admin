@@ -2,6 +2,11 @@ import classes.Class;
 import classes.Course;
 import classes.Student;
 import classes.Teacher;
+import enums.StatusLevel;
+import enums.StatusRegistration;
+
+import static models.TestsEnum.enumTestLevel;
+import static models.TestsEnum.enumTestRegistration;
 
 public class Main {
     public static void main(String[] args) {
@@ -37,6 +42,20 @@ public class Main {
         studentTwo.addCourse(courseTwo);
         System.out.println("\n+---------------------------+");
         studentTwo.listCourses();
+
+        // using values() and valueOf()
+        System.out.println("\n+---------------------------+");
+        enumTestLevel();
+        enumTestRegistration();
+
+        // Getting values from the index
+        System.out.println("\n+---------------------------+");
+        System.out.println("Getting value from Index");
+        System.out.println("Index " + 1 + " - " + StatusLevel.getStatusNameFromIndex(1));
+
+        System.out.println("\n+---------------------------+");
+        System.out.println("Getting value from Index");
+        System.out.println("Index " + 1 + " - " + StatusRegistration.getStatusNameFromIndex(1));
 
     }
 }
