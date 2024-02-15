@@ -69,6 +69,41 @@ public class Main {
         System.out.println("Years of Employment: " + teacher.getEmploymentYears());
         System.out.println("Salary: $" + teacher.getSalary());
 
+        // Creating an instance of TeachersData
+        TeachersData teachersData = new TeachersData();
+
+        // Adding some teachers
+        Teacher teacher1 = new Teacher("João", 35, 2500.00, 5);
+        Teacher teacher2 = new Teacher("Maria", 40, 3000.00, 8);
+
+        teachersData.addTeacher(teacher1);
+        teachersData.addTeacher(teacher2);
+
+        // Testing the removal of a teacher
+        System.out.println("\nRemoving a teacher...");
+        teachersData.removeTeacher(0); // Removes the first added teacher
+
+        // Testing the removal of a teacher
+        System.out.println("\nRemoving a teacher...");
+        teachersData.removeTeacher(2); // Removes the first added teacher
+
+        // Testing the search for a teacher by ID
+        System.out.println("\nSearching for a teacher by ID...");
+        Teacher foundTeacher = teachersData.findTeacherById(0); // Searches for the added teacher by ID
+        if (foundTeacher != null) {
+            System.out.println("Teacher found: " + foundTeacher.getName());
+        }
+
+        // Adding one more teacher
+        Teacher teacher3 = new Teacher("Carlos", 45, 2800.00, 10);
+        teachersData.addTeacher(teacher3);
+
+        // Testing the search for a teacher by ID
+        System.out.println("\nSearching for a teacher by ID...");
+        foundTeacher = teachersData.findTeacherById(2); // Searches for the third added teacher by ID
+        if (foundTeacher != null) {
+            System.out.println("Teacher found: " + foundTeacher.getName());
+        }
 
     }
 
