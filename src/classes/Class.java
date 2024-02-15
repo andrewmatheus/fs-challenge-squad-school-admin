@@ -23,7 +23,7 @@ public class Class {
     public String toString() {
         return "Turma: " +
                 "Ano: " + year +
-                ", Curso: " + course +
+                ", Curso: " + course.getName() +
                 ", Alunos: " + students;
     }
 
