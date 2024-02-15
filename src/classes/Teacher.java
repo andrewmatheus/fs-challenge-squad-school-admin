@@ -1,20 +1,16 @@
 package classes;
 
-public class Teacher extends Employee{
-
+public class Teacher extends Employee {
     private int age;
-    private int employmentYears;
 
-    public Teacher(String name, int age, int employmentYears) {
-            super(name, 0);
-            this.age = age;
-            this.employmentYears = employmentYears;
-        }
+    public Teacher(String name, int age, double salary, int employmentYears) {
+        super(name, salary, employmentYears);
+        this.age = age;
+    }
 
-    public Teacher(String name, int age, int timeWork, double salary) {
+    public Teacher(String name, int age, double salary) {
         super(name, salary);
         this.age = age;
-        this.employmentYears = employmentYears;
     }
 
     public int getAge() {
@@ -24,13 +20,4 @@ public class Teacher extends Employee{
     public void setAge(int age) {
         this.age = age;
     }
-
-    public int getEmploymentYears() {
-        return employmentYears;
-    }
-
-    public void setEmploymentYears(int employmentYears) {
-        this.employmentYears = employmentYears;
-    }
-
 }
