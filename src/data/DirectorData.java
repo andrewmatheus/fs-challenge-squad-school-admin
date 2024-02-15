@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import classes.Director;
 
 public class DirectorData {
-    private List<Director> directorList;
+    private static List<Director> directorList;
 
     public DirectorData() {
         directorList = new ArrayList<>();
