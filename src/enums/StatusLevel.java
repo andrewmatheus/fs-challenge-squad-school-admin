@@ -18,4 +18,13 @@ public enum StatusLevel {
         this.levelValue = levelValue;
     }
 
+    public static StatusLevel getStatusNameFromIndex(int num) {
+        for (StatusLevel value : values()) {
+            if (value.levelValue == num) {
+                return value;
+            }
+        }
+        return null;
+    }
+
 }

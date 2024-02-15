@@ -17,4 +17,13 @@ public enum StatusRegistration {
     StatusRegistration(int registrationValue) {
         this.registrationValue = registrationValue;
     }
+
+    public static StatusRegistration getStatusNameFromIndex(int num) {
+        for (StatusRegistration value : values()) {
+            if (value.registrationValue == num) {
+                return value;
+            }
+        }
+        return null;
+    }
 }
