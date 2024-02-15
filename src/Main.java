@@ -69,6 +69,13 @@ public class Main {
         System.out.println("Years of Employment: " + teacher.getEmploymentYears());
         System.out.println("Salary: $" + teacher.getSalary());
 
+        //Student with try/catch
+        try {
+            Student student = new Student("Fulano", "fulano_dehtal@gmail.com", "48984274452");
+            System.out.println(student.toString());
+        }catch (IllegalArgumentException e){
+            System.out.println("Erro ao criar um estudante: "+e.getMessage());
+        }
 
     }
 
