@@ -9,6 +9,16 @@ public class Director extends Employee {
         this.employmentYears = employmentYears;
     }
 
+    // <editor-fold desc="ToString">
+    @Override
+    public String toString() {
+        return "Diretor: " +
+                "Nome: " + getName() +
+                ", Salário: " + getSalary() +
+                ", Anos de Emprego: " + employmentYears;
+    }
+    // </editor-fold>
+
     public int getEmploymentYears() {
         return employmentYears;
     }

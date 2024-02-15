@@ -11,12 +11,20 @@ public class Employee implements IEmployee {
         this.salary = salary;
     }
 
+    // <editor-fold desc="ToString">
+    @Override
+    public String toString() {
+        return "Funcionário: " +
+                "Nome: " + name +
+                ", Salário: " + salary;
+    }
+    // </editor-fold>
+
     // Getter and setter methods for name and salary
 
     // Implementing the promote method from the IEmployee interface
     @Override
     public void promote() {
-        // Implementation for promoting an employee
     }
 
     public String getName() {
