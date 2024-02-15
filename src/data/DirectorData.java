@@ -19,7 +19,11 @@ public class DirectorData {
         directorList.remove(id);
     }
 
-    public Director search(int id) {
+    public void removeDirector(Director director) {
+        directorList.remove(director);
+    }
+
+    public Director getDirector(int id) {
         return directorList.get(id);
     }
 }
