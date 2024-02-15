@@ -25,6 +25,7 @@ public class Employee implements IEmployee {
     // Implementing the promote method from the IEmployee interface
     @Override
     public void promote() {
+        // Implementation for promoting an employee
     }
 
     public String getName() {
