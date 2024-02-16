@@ -1,4 +1,6 @@
-package classes;
+package data;
+
+import classes.Teacher;
 
 import java.util.ArrayList;
 import java.util.List;
