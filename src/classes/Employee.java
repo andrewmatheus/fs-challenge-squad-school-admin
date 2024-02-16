@@ -1,9 +1,13 @@
 package classes;
 
+import enums.EmployeeLevel;
+
 public class Employee implements IEmployee {
     private String name;
     private double salary;
     private int employmentYears;
+    private EmployeeLevel jobLevel = EmployeeLevel.BEGINNER;
+
 
     // Constructor
     public Employee(String name, double salary, int employmentYears) {
@@ -24,17 +28,43 @@ public class Employee implements IEmployee {
         return "Funcionário: " +
                 "Nome: " + name +
                 ", Salário: " + salary +
-                ", Anos de Emprego: " + employmentYears;
+                ", Anos de Emprego: " + employmentYears +
+                ", Cargo: "+ jobLevel;
     }
     // </editor-fold>
-
-    // Implementing the promote method from the IEmployee interface
     @Override
-    public void promote() {
-        // TODO Implementation for promoting an employee
+    public void promotion() {
+        double p_increase = 0.25;
+        p_increase *= getSalary();
+        setSalary(getSalary() + p_increase);
+        if (jobLevel != null) {
+            setJobLevel(nextJobLevel(jobLevel));
+        }
+    }
+    @Override
+    public void setJobLevel(EmployeeLevel jobLevel) {
+        this.jobLevel = jobLevel;
     }
 
-    // Getter and setter methods for name, employmentYears and salary
+    public EmployeeLevel getJobLevel() {
+        return jobLevel;
+    }
+    // next job level
+
+    private EmployeeLevel nextJobLevel(EmployeeLevel currentJob){
+        switch (currentJob) {
+            case BEGINNER:
+                return EmployeeLevel.EXPERIENCED;
+            case EXPERIENCED:
+                return EmployeeLevel.ADVANCED;
+            case ADVANCED:
+                System.out.println(getName()+", atingiu cargo mais alto "+EmployeeLevel.ADVANCED);
+        }
+        return currentJob;
+    }
+
+
+// Getter and setter methods for name, employmentYears and salary
 
     public String getName() {
         return name;
