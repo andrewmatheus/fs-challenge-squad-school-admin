@@ -44,6 +44,33 @@ public class Main {
         System.out.println("\n+---------------------------+");
         studentTwo.listCourses();
 
+        // Testing Employee and Director classes
+        System.out.println("\nTesting Employee and Director classes:");
+
+        // Creating an Employee
+        Employee employee = new Employee("John Doe", 50000.00);
+
+        // Promoting the employee
+        employee.promote();
+
+        // Displaying employee information
+        System.out.println("\nEmployee Information:");
+        System.out.println(employee);
+
+        // Creating a Director
+        Director director = new Director("Jane Smith", 60000.00, 5);
+        
+        // Displaying director information
+        System.out.println("\nDirector Information:");
+        System.out.println(director);
+
+        // Displaying teacher information
+        System.out.println("\nTeacher Information:");
+        System.out.println(teacher);
+
+        System.out.println("\nStudent Information:");
+        System.out.println(studentOne);
+
         // using values() and valueOf()
         System.out.println("\n+---------------------------+");
         enumTestLevel();
@@ -59,6 +86,5 @@ public class Main {
         System.out.println("\n+---------------------------+");
         System.out.println("Getting value from Index");
         System.out.println("Index " + 1 + " - " + EnrollmentStatus.getStatusNameFromIndex(1));
-
     }
 }

@@ -24,7 +24,7 @@ public class Class {
         return "Turma: " +
                 "Ano: " + year +
                 ", Curso: " + course.getName() +
-                ", Alunos: " + students;
+                ", Alunos: " + students.size();
     }
     // </editor-fold>
 
