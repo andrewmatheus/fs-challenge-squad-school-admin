@@ -1,3 +1,4 @@
+import classes.*;
 import classes.Class;
 import classes.Course;
 import classes.Student;
@@ -13,7 +14,7 @@ public class Main {
         // Usage example
 
         // Creating a teacher
-        Teacher teacher = new Teacher("André", 30, 10);
+        Teacher teacher = new Teacher("André", 30, 25000.00, 10);
 
         // Creating a course
         Course course = new Course("BackEnd-Java", teacher);
