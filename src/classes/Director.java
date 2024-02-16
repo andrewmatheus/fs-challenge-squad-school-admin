@@ -14,10 +14,6 @@ public class Director extends Employee {
         super(name, salary, employmentYears);
     }
 
-    public Director(String name, double salary) {
-        super(name, salary);
-    }
-
     // <editor-fold desc="ToString">
     @Override
         public String toString() {
