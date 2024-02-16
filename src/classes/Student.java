@@ -86,7 +86,7 @@ public class Student {
     /*
      * Method getAge and SetAge
      * */
-    public int getAge() {
+    public byte getAge() {
         return age;
     }
 
