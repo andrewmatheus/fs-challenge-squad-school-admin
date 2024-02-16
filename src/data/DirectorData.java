@@ -5,11 +5,7 @@ import java.util.ArrayList;
 import classes.Director;
 
 public class DirectorData {
-    private static List<Director> directorList;
-
-    public DirectorData() {
-        directorList = new ArrayList<>();
-    }
+    private static List<Director> directorList = new ArrayList<>();
 
     public void addDirector(Director director) {
         directorList.add(director);
@@ -23,7 +19,7 @@ public class DirectorData {
         directorList.remove(director);
     }
 
-    public Director getDirector(int id) {
+    public Director findDirectorById(int id) {
         return directorList.get(id);
     }
 }
