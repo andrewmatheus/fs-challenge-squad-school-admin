@@ -1,5 +1,13 @@
 import classes.*;
 import classes.Class;
+import classes.Course;
+import classes.Student;
+import classes.Teacher;
+import enums.EmployeeLevel;
+import enums.EnrollmentStatus;
+
+import static models.TestsEnum.enumTestLevel;
+import static models.TestsEnum.enumTestEnrollment;
 
 public class Main {
     public static void main(String[] args) {
@@ -36,47 +44,21 @@ public class Main {
         System.out.println("\n+---------------------------+");
         studentTwo.listCourses();
 
-        // Testing Employee and Director classes
-        System.out.println("\nTesting Employee and Director classes:");
+        // using values() and valueOf()
+        System.out.println("\n+---------------------------+");
+        enumTestLevel();
 
-        // Creating an Employee
-        Employee employee = new Employee("John Doe", 50000.00);
+        System.out.println("\n+---------------------------+");
+        enumTestEnrollment();
 
-        // Promoting the employee
-        employee.promote();
+        // Getting values from the index
+        System.out.println("\n+---------------------------+");
+        System.out.println("Getting value from Index");
+        System.out.println("Index " + 1 + " - " + EmployeeLevel.getStatusNameFromIndex(1));
 
-        // Displaying employee information
-        System.out.println("\nEmployee Information:");
-        System.out.println("Name: " + employee.getName());
-        System.out.println("Salary: $" + employee.getSalary());
+        System.out.println("\n+---------------------------+");
+        System.out.println("Getting value from Index");
+        System.out.println("Index " + 1 + " - " + EnrollmentStatus.getStatusNameFromIndex(1));
 
-        // Creating a Director
-        Director director = new Director("Jane Smith", 60000.00, 5);
-
-        // Promoting the director
-        director.promote();
-
-        // Displaying director information
-        System.out.println("\nDirector Information:");
-        System.out.println("Name: " + director.getName());
-        System.out.println("Salary: $" + director.getSalary());
-        System.out.println("Years as Director: " + director.getEmploymentYears());
-
-        // Displaying teacher information
-        System.out.println("\nTeacher Information:");
-        System.out.println("Name: " + teacher.getName());
-        System.out.println("Age: " + teacher.getAge());
-        System.out.println("Years of Employment: " + teacher.getEmploymentYears());
-        System.out.println("Salary: $" + teacher.getSalary());
-
-        //Student with try/catch
-        // try {
-        //     Student student = new Student("Fulano", "fulano_dehtal@gmail.com", "48984274452");
-        //     System.out.println(student.toString());
-        // }catch (IllegalArgumentException e){
-        //     System.out.println("Erro ao criar um estudante: "+e.getMessage());
-        // }
     }
-
-
 }
