@@ -7,19 +7,19 @@
 
 package enums;
 
-public enum StatusRegistration {
+public enum EnrollmentStatus {
     ACTIVE(1),
     LOCKED(2),
     GRADUATED(3);
 
     private final int registrationValue;
 
-    StatusRegistration(int registrationValue) {
+    EnrollmentStatus(int registrationValue) {
         this.registrationValue = registrationValue;
     }
 
-    public static StatusRegistration getStatusNameFromIndex(int num) {
-        for (StatusRegistration value : values()) {
+    public static EnrollmentStatus getStatusNameFromIndex(int num) {
+        for (EnrollmentStatus value : values()) {
             if (value.registrationValue == num) {
                 return value;
             }

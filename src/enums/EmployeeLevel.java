@@ -7,19 +7,19 @@
 
 package enums;
 
-public enum StatusLevel {
+public enum EmployeeLevel {
     BEGINNER(1),
     EXPERIENCED(2),
     ADVANCED(3);
 
     private final int levelValue;
 
-    StatusLevel(int levelValue) {
+    EmployeeLevel(int levelValue) {
         this.levelValue = levelValue;
     }
 
-    public static StatusLevel getStatusNameFromIndex(int num) {
-        for (StatusLevel value : values()) {
+    public static EmployeeLevel getStatusNameFromIndex(int num) {
+        for (EmployeeLevel value : values()) {
             if (value.levelValue == num) {
                 return value;
             }
