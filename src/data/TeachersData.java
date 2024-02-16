@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TeachersData {
-    private static List<Teacher> teachersList;
+    private static List<Teacher> teachersList = new ArrayList<>();
 
     public void addTeacher(Teacher professor) {
         teachersList.add(professor);
