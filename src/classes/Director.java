@@ -8,5 +8,18 @@ public class Director extends Employee {
     public Director(String name, double salary) {
         super(name, salary);
     }
+
+    // <editor-fold desc="ToString">
+    @Override
+        public String toString() {
+        return "Diretor: " +
+                "Nome: " + getName() +
+                ", Salário: " + getSalary() +
+                ", Anos de Emprego: " + getEmploymentYears();
+    }
+    // </editor-fold>
 }
+
+
+
 
