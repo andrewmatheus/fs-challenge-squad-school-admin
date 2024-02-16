@@ -1,5 +1,13 @@
 import classes.*;
 import classes.Class;
+import classes.Course;
+import classes.Student;
+import classes.Teacher;
+import enums.EmployeeLevel;
+import enums.EnrollmentStatus;
+
+import static models.TestsEnum.enumTestLevel;
+import static models.TestsEnum.enumTestEnrollment;
 
 public class Main {
     public static void main(String[] args) {
@@ -51,10 +59,7 @@ public class Main {
 
         // Creating a Director
         Director director = new Director("Jane Smith", 60000.00, 5);
-
-        // Promoting the director
-        director.promote();
-
+        
         // Displaying director information
         System.out.println("\nDirector Information:");
         System.out.println(director);
@@ -66,14 +71,20 @@ public class Main {
         System.out.println("\nStudent Information:");
         System.out.println(studentOne);
 
-        //Student with try/catch
-        // try {
-        //     Student student = new Student("Fulano", "fulano_dehtal@gmail.com", "48984274452");
-        //     System.out.println(student.toString());
-        // }catch (IllegalArgumentException e){
-        //     System.out.println("Erro ao criar um estudante: "+e.getMessage());
-        // }
+        // using values() and valueOf()
+        System.out.println("\n+---------------------------+");
+        enumTestLevel();
+
+        System.out.println("\n+---------------------------+");
+        enumTestEnrollment();
+
+        // Getting values from the index
+        System.out.println("\n+---------------------------+");
+        System.out.println("Getting value from Index");
+        System.out.println("Index " + 1 + " - " + EmployeeLevel.getStatusNameFromIndex(1));
+
+        System.out.println("\n+---------------------------+");
+        System.out.println("Getting value from Index");
+        System.out.println("Index " + 1 + " - " + EnrollmentStatus.getStatusNameFromIndex(1));
     }
-
-
 }
