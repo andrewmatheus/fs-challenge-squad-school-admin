@@ -18,7 +18,7 @@ public class Course {
     public String toString() {
         return "Curso: " +
                 "Nome: " + name +
-                ", Professor: " + teacher;
+                ", Professor: " + teacher.getName();
     }
     // </editor-fold>
 

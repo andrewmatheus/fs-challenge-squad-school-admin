@@ -55,9 +55,8 @@ public class Student {
     // <editor-fold desc="ToString">
     @Override
     public String toString() {
-        return "Estudante: "+
-                "Nome: "+ name +
-                ", Cursos: "+ courses;
+        return "Estudante: " +
+                "Nome: " + name;
     }
     // </editor-fold>
 

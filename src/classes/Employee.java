@@ -23,7 +23,8 @@ public class Employee implements IEmployee {
     public String toString() {
         return "Funcionário: " +
                 "Nome: " + name +
-                ", Salário: " + salary;
+                ", Salário: " + salary +
+                ", Anos de Emprego: " + employmentYears;
     }
     // </editor-fold>
 

@@ -18,8 +18,9 @@ public class Teacher extends Employee {
     public String toString() {
         return "Professor: " +
                 "Nome: " + getName() +
-                ", Idade: " + age +
-                ", Anos de trabalho: " + getEmploymentYears();
+                ", Salário: " + getSalary() +
+                ", Anos de Emprego: " + getEmploymentYears() +
+                ", Idade: " + age;
     }
     // </editor-fold>
 

@@ -47,8 +47,7 @@ public class Main {
 
         // Displaying employee information
         System.out.println("\nEmployee Information:");
-        System.out.println("Name: " + employee.getName());
-        System.out.println("Salary: $" + employee.getSalary());
+        System.out.println(employee);
 
         // Creating a Director
         Director director = new Director("Jane Smith", 60000.00, 5);
@@ -58,16 +57,14 @@ public class Main {
 
         // Displaying director information
         System.out.println("\nDirector Information:");
-        System.out.println("Name: " + director.getName());
-        System.out.println("Salary: $" + director.getSalary());
-        System.out.println("Years as Director: " + director.getEmploymentYears());
+        System.out.println(director);
 
         // Displaying teacher information
         System.out.println("\nTeacher Information:");
-        System.out.println("Name: " + teacher.getName());
-        System.out.println("Age: " + teacher.getAge());
-        System.out.println("Years of Employment: " + teacher.getEmploymentYears());
-        System.out.println("Salary: $" + teacher.getSalary());
+        System.out.println(teacher);
+
+        System.out.println("\nStudent Information:");
+        System.out.println(studentOne);
 
         //Student with try/catch
         // try {
