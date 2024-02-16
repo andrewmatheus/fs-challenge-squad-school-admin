@@ -54,13 +54,16 @@ public class Student {
 
     // </editor-fold>
 
-    // <editor-fold desc="ToString">
+    //<editor-fold desc="ToString">
     @Override
     public String toString() {
-        return "Estudante: " +
-                "Nome: " + name;
+        return "Estudante: "+
+                "Nome: "+ name +
+                ", Cursos: "+ courses +
+                ", Email: "+ email +
+                ", Telefone: "+ phoneNumber;
     }
-    // </editor-fold>
+    //</editor-fold>
 
     // <editor-fold desc="Overload">
     public Student(String name, byte age) {
@@ -118,17 +121,3 @@ public class Student {
     }
     // </editor-fold>
 }
-
-
-//Depois que estiver aprovado o pull request do Overrid e tostring tem que colocar assim o codigo:
-    // <editor-fold desc="ToString">
-    // @Override
-    // public String toString() {
-    //     return "Estudante: "+
-    //             "Nome: "+ name +
-    //             ", Cursos: "+ courses;
-    //             ", Cursos: "+ courses +
-    //             ", Email: "+ email +
-    //             ", Telefone: "+ phoneNumber;
-    // }
-    // </editor-fold>
