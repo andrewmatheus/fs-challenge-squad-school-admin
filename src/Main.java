@@ -1,12 +1,22 @@
 import classes.*;
 import classes.Class;
+import classes.Course;
+import classes.Student;
+import classes.Teacher;
+import enums.EmployeeLevel;
+import enums.EnrollmentStatus;
+
+import static models.TestsEnum.enumTestLevel;
+import static models.TestsEnum.enumTestEnrollment;
+
+import data.TeachersData;
 
 public class Main {
     public static void main(String[] args) {
         // Usage example
 
         // Creating a teacher
-        Teacher teacher = new Teacher("André", 30, 10, 25000.00);
+        Teacher teacher = new Teacher("André", 30, 25000.00, 10);
 
         // Creating a course
         Course course = new Course("BackEnd-Java", teacher);
@@ -47,30 +57,72 @@ public class Main {
 
         // Displaying employee information
         System.out.println("\nEmployee Information:");
-        System.out.println("Name: " + employee.getName());
-        System.out.println("Salary: $" + employee.getSalary());
+        System.out.println(employee);
 
         // Creating a Director
         Director director = new Director("Jane Smith", 60000.00, 5);
-
-        // Promoting the director
-        director.promote();
-
+        
         // Displaying director information
         System.out.println("\nDirector Information:");
-        System.out.println("Name: " + director.getName());
-        System.out.println("Salary: $" + director.getSalary());
-        System.out.println("Years as Director: " + director.getEmploymentYears());
+        System.out.println(director);
 
         // Displaying teacher information
         System.out.println("\nTeacher Information:");
-        System.out.println("Name: " + teacher.getName());
-        System.out.println("Age: " + teacher.getAge());
-        System.out.println("Years of Employment: " + teacher.getEmploymentYears());
-        System.out.println("Salary: $" + teacher.getSalary());
+        System.out.println(teacher);
+      
+        System.out.println("\nStudent Information:");
+        System.out.println(studentOne);
 
+        // Creating an instance of TeachersData
+        TeachersData teachersData = new TeachersData();
 
+        // Adding some teachers
+        Teacher teacher1 = new Teacher("João", 35, 2500.00, 5);
+        Teacher teacher2 = new Teacher("Maria", 40, 3000.00, 8);
+
+        teachersData.addTeacher(teacher1);
+        teachersData.addTeacher(teacher2);
+
+        // Testing the removal of a teacher
+        System.out.println("\nRemoving a teacher...");
+        teachersData.removeTeacher(0); // Removes the first added teacher
+
+        // Testing the removal of a teacher
+        System.out.println("\nRemoving a teacher...");
+        teachersData.removeTeacher(2); // Removes the first added teacher
+
+        // Testing the search for a teacher by ID
+        System.out.println("\nSearching for a teacher by ID...");
+        Teacher foundTeacher = teachersData.findTeacherById(0); // Searches for the added teacher by ID
+        if (foundTeacher != null) {
+            System.out.println("Teacher found: " + foundTeacher.getName());
+        }
+
+        // Adding one more teacher
+        Teacher teacher3 = new Teacher("Carlos", 45, 2800.00, 10);
+        teachersData.addTeacher(teacher3);
+
+        // Testing the search for a teacher by ID
+        System.out.println("\nSearching for a teacher by ID...");
+        foundTeacher = teachersData.findTeacherById(2); // Searches for the third added teacher by ID
+        if (foundTeacher != null) {
+            System.out.println("Teacher found: " + foundTeacher.getName());
+        }
+
+        // using values() and valueOf()
+        System.out.println("\n+---------------------------+");
+        enumTestLevel();
+
+        System.out.println("\n+---------------------------+");
+        enumTestEnrollment();
+
+        // Getting values from the index
+        System.out.println("\n+---------------------------+");
+        System.out.println("Getting value from Index");
+        System.out.println("Index " + 1 + " - " + EmployeeLevel.getStatusNameFromIndex(1));
+
+        System.out.println("\n+---------------------------+");
+        System.out.println("Getting value from Index");
+        System.out.println("Index " + 1 + " - " + EnrollmentStatus.getStatusNameFromIndex(1));
     }
-
-
 }

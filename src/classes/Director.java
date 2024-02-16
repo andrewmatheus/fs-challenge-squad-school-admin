@@ -9,17 +9,26 @@ public class Director extends Employee {
     }
 
     // Constructor
-    public Director(String name, double salary, int employmentYears) {
+
+  public Director(String name, double salary, int employmentYears) {
+        super(name, salary, employmentYears);
+    }
+
+    public Director(String name, double salary) {
         super(name, salary);
-        this.employmentYears = employmentYears;
     }
 
-    public int getEmploymentYears() {
-        return employmentYears;
+    // <editor-fold desc="ToString">
+    @Override
+        public String toString() {
+        return "Diretor: " +
+                "Nome: " + getName() +
+                ", Salário: " + getSalary() +
+                ", Anos de Emprego: " + getEmploymentYears();
     }
-
-    public void setEmploymentYears(int employmentYears) {
-        this.employmentYears = employmentYears;
-    }
+    // </editor-fold>
 }
+
+
+
 
