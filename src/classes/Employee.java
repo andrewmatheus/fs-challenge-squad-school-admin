@@ -10,11 +10,12 @@ public class Employee implements IEmployee {
     private int employmentYears;
     private EmployeeLevel jobLevel;
 
-
     //overload
     public Employee(String name) {
         this.name = name;
+        this.jobLevel = EmployeeLevel.BEGINNER;
     }
+
     // Constructor
     public Employee(String name, double salary, int employmentYears) {
         this.name = name;
@@ -40,6 +41,7 @@ public class Employee implements IEmployee {
                 ", Cargo: "+ jobLevel;
     }
     // </editor-fold>
+
     @Override
     public void promotion() {
         increaseSalary();
@@ -55,6 +57,7 @@ public class Employee implements IEmployee {
         }
     }
 
+    // overload with default percentIncrease of 1.25
     public void increaseSalary() {
         increaseSalary(1.25);
     }
@@ -85,9 +88,7 @@ public class Employee implements IEmployee {
         return currentJob;
     }
 
-
-// Getter and setter methods for name, employmentYears and salary
-
+    // Getter and setter methods for name, employmentYears and salary
     public String getName() {
         return name;
     }
