@@ -5,6 +5,15 @@ import enums.EmployeeLevel;
 public class Teacher extends Employee {
     private int age;
 
+    public Teacher(String name, int employmentYears) {
+        super(name, 0, employmentYears);
+    }
+
+    public Teacher(String name, int age, int employmentYears) {
+            super(name, 0, employmentYears);
+            this.age = age;
+        }
+
     public Teacher(String name, int age, double salary, int employmentYears) {
         super(name, salary, employmentYears);
         this.age = age;
