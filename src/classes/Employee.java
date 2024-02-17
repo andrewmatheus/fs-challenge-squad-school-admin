@@ -2,24 +2,27 @@ package classes;
 
 import enums.EmployeeLevel;
 
+import java.security.InvalidParameterException;
+
 public class Employee implements IEmployee {
     private String name;
     private double salary;
     private int employmentYears;
-    private EmployeeLevel jobLevel = EmployeeLevel.BEGINNER;
-
+    private EmployeeLevel jobLevel;
 
     // Constructor
     public Employee(String name, double salary, int employmentYears) {
         this.name = name;
         this.salary = salary;
         this.employmentYears = employmentYears;
+        this.jobLevel = EmployeeLevel.BEGINNER;
     }
 
     public Employee(String name, double salary) {
         this.name = name;
         this.salary = salary;
         this.employmentYears = 0;
+        this.jobLevel = EmployeeLevel.BEGINNER;
     }
 
     // <editor-fold desc="ToString">
@@ -34,16 +37,30 @@ public class Employee implements IEmployee {
     // </editor-fold>
     @Override
     public void promotion() {
-        double p_increase = 0.25;
-        p_increase *= getSalary();
-        setSalary(getSalary() + p_increase);
-        if (jobLevel != null) {
-            setJobLevel(nextJobLevel(jobLevel));
+        increaseSalary();
+        setJobLevel(nextJobLevel(jobLevel));
+    }
+
+    public void increaseSalary(double percentIncrease) {
+        if (percentIncrease > 1) {
+            double newSalary = getSalary() * percentIncrease;
+            setSalary(newSalary);
+        } else {
+            throw new InvalidParameterException("Percent increase has to be greater than 1.");
         }
     }
+
+    public void increaseSalary() {
+        increaseSalary(1.25);
+    }
+
     @Override
     public void setJobLevel(EmployeeLevel jobLevel) {
-        this.jobLevel = jobLevel;
+        if (jobLevel != null) {
+            this.jobLevel = jobLevel;
+        } else {
+            throw new InvalidParameterException("Job level cannot be null.");
+        }
     }
 
     public EmployeeLevel getJobLevel() {
