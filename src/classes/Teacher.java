@@ -1,5 +1,7 @@
 package classes;
 
+import enums.EmployeeLevel;
+
 public class Teacher extends Employee {
     private int age;
 
@@ -29,7 +31,8 @@ public class Teacher extends Employee {
                 "Nome: " + getName() +
                 ", Salário: " + getSalary() +
                 ", Anos de Emprego: " + getEmploymentYears() +
-                ", Idade: " + age;
+                ", Idade: " + age +
+                ", Cargo: "+ getJobLevel();
     }
     // </editor-fold>
 

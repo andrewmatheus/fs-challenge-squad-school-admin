@@ -1,5 +1,9 @@
 package classes;
 
+import enums.EmployeeLevel;
+
 public interface IEmployee {
-    void promote();
+    void promotion();
+    void setJobLevel(EmployeeLevel jobLevel);
+    EmployeeLevel getJobLevel();
 }

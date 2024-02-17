@@ -20,7 +20,8 @@ public class Director extends Employee {
         return "Diretor: " +
                 "Nome: " + getName() +
                 ", Salário: " + getSalary() +
-                ", Anos de Emprego: " + getEmploymentYears();
+                ", Anos de Emprego: " + getEmploymentYears()+
+                ", Cargo: " + getJobLevel();
     }
     // </editor-fold>
 }

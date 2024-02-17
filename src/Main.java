@@ -53,7 +53,10 @@ public class Main {
         Employee employee = new Employee("John Doe", 50000.00);
 
         // Promoting the employee
-        employee.promote();
+        IEmployee teacher99 = new Teacher("Beltrano", 30, 4000.0, 3);
+        System.out.println("Antes da promoção: " + teacher);
+        teacher99.promotion();
+        System.out.println("promoção: " + teacher); //1 promotions
 
         // Displaying employee information
         System.out.println("\nEmployee Information:");
