@@ -7,11 +7,11 @@ import classes.Director;
 public class DirectorsData {
     private static List<Director> directorsList = new ArrayList<>();
 
-    public void addDirector(Director director) {
+    public static void addDirector(Director director) {
         directorsList.add(director);
     }
 
-    public void removeDirector(int id) {
+    public static void removeDirector(int id) {
         try {
             Director removedDirector = directorsList.remove(id);
             System.out.println("Director " + removedDirector.getName() + " successfully removed.");
@@ -21,7 +21,7 @@ public class DirectorsData {
         }
     }
 
-    public Director findDirectorById(int id) {
+    public static Director findDirectorById(int id) {
         if (id >= 0 && id < directorsList.size()) {
             return directorsList.get(id);
         } else {
