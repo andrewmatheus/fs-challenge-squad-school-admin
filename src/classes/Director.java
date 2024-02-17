@@ -1,12 +1,17 @@
 package classes;
 
 public class Director extends Employee {
-    public Director(String name, double salary, int employmentYears) {
-        super(name, salary, employmentYears);
-    }
+    private int employmentYears;
 
+    //overload
     public Director(String name, double salary) {
         super(name, salary);
+    }
+
+    // Constructor
+
+  public Director(String name, double salary, int employmentYears) {
+        super(name, salary, employmentYears);
     }
 
     // <editor-fold desc="ToString">
