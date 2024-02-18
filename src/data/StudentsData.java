@@ -1,36 +1,29 @@
 package data;
 
 import classes.Student;
-import enums.EnrollmentStatus;
 
-import java.sql.Array;
 import java.util.ArrayList;
 
 public class StudentsData {
+
     private static ArrayList<Student> studentsList = new ArrayList<>();
-    private static ArrayList<EnrollmentStatus> studentEnrollmentList = new ArrayList<>();
 
     /*
      * Method addStudent - responsible for adding a student to the list.
      * */
-    public static void addStudent(Student student) {
-        addStudent(student, EnrollmentStatus.ACTIVE);
-    }
-
-    public static void addStudent(Student student, EnrollmentStatus enrollmentStatus) {
+        public static void addStudent(Student student) {
         studentsList.add(student);
-        studentEnrollmentList.add(enrollmentStatus);
     }
 
     /*
      * Method removeStudent - responsible for removing a student from the list.
      * */
     public static void removeStudent(int id) {
-        if (id >= 0 && id < studentsList.size()) {
+        try {
             Student removedStudent = studentsList.remove(id);
-            studentEnrollmentList.remove(id);
             System.out.println("Student " + removedStudent.getName() + " successfully removed.");
-        } else {
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Error: " + e.getMessage());
             System.out.println("Invalid ID. Student could not be removed.");
         }
     }
