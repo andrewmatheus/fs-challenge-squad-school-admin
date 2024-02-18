@@ -10,6 +10,7 @@ import static models.TestsEnum.enumTestLevel;
 import static models.TestsEnum.enumTestEnrollment;
 
 import data.TeachersData;
+import interfaces.IEmployee;
 
 public class Main {
     public static void main(String[] args) {
@@ -36,15 +37,6 @@ public class Main {
         // list students the class2024
         System.out.println("\n+---------------------------+");
         class2024.listStudents();
-
-        // add courses for student
-        studentOne.addCourse(course);
-        System.out.println("\n+---------------------------+");
-        studentOne.listCourses();
-
-        studentTwo.addCourse(courseTwo);
-        System.out.println("\n+---------------------------+");
-        studentTwo.listCourses();
 
         // Testing Employee and Director classes
         System.out.println("\nTesting Employee and Director classes:");

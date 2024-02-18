@@ -2,8 +2,10 @@ package Testing;
 
 import classes.Director;
 import classes.Employee;
-import classes.IEmployee;
+
 import classes.Teacher;
+import interfaces.IEmployee;
+
 public class promotion {
     public static void main(String[] args) {
         IEmployee employee = new Employee("Fulano", 3000.0, 2);

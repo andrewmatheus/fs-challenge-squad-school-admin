@@ -22,7 +22,6 @@ public class TeachersData {
         }
     }
 
-
     public Teacher findTeacherById(int id) {
         if (id >= 0 && id < teachersList.size()) {
             return teachersList.get(id);
