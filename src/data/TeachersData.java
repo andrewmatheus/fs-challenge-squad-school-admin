@@ -8,11 +8,11 @@ import java.util.List;
 public class TeachersData {
     private static List<Teacher> teachersList = new ArrayList<>();
 
-    public void addTeacher(Teacher professor) {
+    public static void addTeacher(Teacher professor) {
         teachersList.add(professor);
     }
 
-    public void removeTeacher(int id) {
+    public static void removeTeacher(int id) {
         try {
             Teacher removedTeacher = teachersList.remove(id);
             System.out.println("Teacher " + removedTeacher.getName() + " successfully removed.");
