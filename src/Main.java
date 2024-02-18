@@ -23,7 +23,7 @@ public class Main {
         Course courseTwo = new Course("FrontEnd-Angular", teacher);
 
         // Creating a class with course
-        Class class2024 = new Class(2024, course);
+        Class class2024 = new Class("BackEnd-Java 2024", 2024, course);
 
         // Creating a students
         Student studentOne = new Student("Gabriel");
