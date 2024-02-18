@@ -66,6 +66,24 @@ public class Class {
         }
     }
 
+    public EnrollmentStatus getEnrollmentStatus(Student student) {
+        int index = students.indexOf(student);
+        if (index >= 0) {
+            return studentEnrollmentList.get(index);
+        } else {
+            throw new InvalidParameterException("Could not retrieve student enrollment status. Student not found.");
+        }
+    }
+
+    public void setEnrollmentStatus(Student student, EnrollmentStatus enrollmentStatus) {
+        int index = students.indexOf(student);
+        if (index >= 0) {
+            studentEnrollmentList.set(index, enrollmentStatus);
+        } else {
+            throw new InvalidParameterException("Could not set student enrollment status. Student not found.");
+        }
+    }
+
     public int getYear() {
         return year;
     }
