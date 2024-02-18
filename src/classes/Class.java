@@ -53,7 +53,7 @@ public class Class {
             students.remove(index);
             studentEnrollmentList.remove(index);
         } else {
-            throw new InvalidParameterException("");
+            throw new InvalidParameterException("Could not remove student from class. Student not found.");
         }
     }
     /*
