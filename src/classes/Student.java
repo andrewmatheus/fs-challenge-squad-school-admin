@@ -22,7 +22,7 @@ public class Student {
     }
     // </editor-fold>
 
-        // <editor-fold desc="try/catch">
+    // <editor-fold desc="try/catch">
     // Another overload / With try/catch
     public Student(String name, String email, String phoneNumber){
         this.name = name;
@@ -41,7 +41,7 @@ public class Student {
     //Method to validate if the email is correct
     public void validateEmail(String email){
         if (!email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@.+\\..+$")) {
-            throw new IllegalArgumentException("O email é INVALIDO!");
+            throw new IllegalArgumentException("O email informado não é valido!");
         }
     }
     //Method to validate if the Phone is correct

@@ -1,4 +1,4 @@
-package classes;
+package interfaces;
 
 import enums.EmployeeLevel;
 
