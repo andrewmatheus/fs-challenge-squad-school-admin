@@ -8,9 +8,6 @@ import data.TeachersData;
 
 import java.util.Scanner;
 
-import static data.DirectorsData.findDirectorByName;
-import static data.StudentsData.findStudentByMail;
-import static data.TeachersData.findTeacherByName;
 import static utils.Validations.validateEmail;
 public class Main {
 
@@ -118,8 +115,8 @@ public class Main {
                 if (!mail.trim().isEmpty()) {
                     if (validateEmail(mail)) {
 
-                        Student student = findStudentByMail(mail);
-
+                        Student student = StudentsData.findStudentByMail(mail);
+                        
                         if (student == null) {
                             System.out.println("Aluno(a) não encontrado!");
                             student = addNewStudent(scan, mail);
@@ -285,11 +282,11 @@ public class Main {
 
             if (name != null && !name.trim().isEmpty()) {
 
-                Teacher teacher = findTeacherByName(name);
+                Teacher teacher = TeachersData.findTeacherByName(name);
 
                 if (teacher == null) {
 
-                    Director director = findDirectorByName(name);
+                    Director director = DirectorsData.findDirectorByName(name);
 
                     if (director == null){
                         System.out.println("Seu nome não foi identificado em nossa base de dados! Realize seu cadastro:");
