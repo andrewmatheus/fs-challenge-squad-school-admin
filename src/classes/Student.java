@@ -89,5 +89,18 @@ public class Student {
     public void setAge(byte age) {
         this.age = age;
     }
-    // </editor-fold>
+
+    /*
+     * Method getEmail
+     * */
+    public String getEmail() {
+        return email;
+    }
+    /*
+     * Method setEmail
+     * */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+// </editor-fold>
 }
