@@ -12,24 +12,26 @@ import java.util.Scanner;
 
 public class StudentActions {
     public static void menu(Scanner scanner, Student currentStudent) {
-        boolean finish = false;
-        while (!finish) {
-            System.out.println("Usuário atual - Estudante: " + currentStudent.getName());
-            System.out.println();
-            System.out.println("Opções:");
-            System.out.println("1. Listar classes");
-            System.out.println("2. Adicionar classe");
-            System.out.println("3. Remover classe");
-            System.out.println("4. Alterar matrícula");
-            System.out.println("5. Sair");
-            System.out.print("Escolha uma opção: ");
+        try {
+            int optionSelected;
+            do {
+                System.out.println("\nALUNO: " + currentStudent.getName() );
+                System.out.println("+--------------------------------+");
+                System.out.println("|                                |");
+                System.out.println("| (1) - Meu(s) Cursos            |");
+                System.out.println("| (2) - Matricular em novo Curso |");
+                System.out.println("| (3) - Abandonar curso          |");
+                System.out.println("| (4) - Alterar Matrícula        |");
+                System.out.println("|                                |");
+                System.out.println("+--------------------------------+");
+                System.out.println("| (0) - Sair                     |");
+                System.out.println("+--------------------------------+");
+                System.out.print("Selecione uma opção: ");
 
-            try {
-                String choiceString = scanner.nextLine().strip();
-                int choice = Integer.parseInt(choiceString);
+                String optionString = scanner.nextLine().strip();
+                optionSelected = Integer.parseInt(optionString);
 
-                System.out.println();
-                switch (choice) {
+                switch (optionSelected) {
                     case 1:
                         listClasses(scanner, currentStudent, true);
                         break;
@@ -42,16 +44,16 @@ public class StudentActions {
                     case 4:
                         changeEnrollmentMenu(scanner, currentStudent);
                         break;
-                    case 5:
-                        finish = true;
+                    case 0:
+                        System.out.println("Deslogado com sucesso!");
                         break;
+                    default:
+                        System.out.println("Opção selecionada não é válida. Voltando ao menu principal...");
                 }
-            } catch (NumberFormatException e) {
-                System.out.println();
-                System.out.println("Opção inválida.");
-            } finally {
-                System.out.println();
-            }
+            } while (optionSelected != 0);
+
+        } catch (Exception exception) {
+            System.out.println("Opção informada não é válida. Informe um número de acordo com menu.");
         }
     }
 
