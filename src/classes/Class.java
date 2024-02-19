@@ -17,6 +17,7 @@ public class Class {
     // <editor-fold desc="Constructor">
     public Class(int year, Course course) {
         this.students = new ArrayList<>();
+        this.studentEnrollmentList = new ArrayList<>();
         this.year = year;
         this.course = course;
     }
