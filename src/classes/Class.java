@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Class {
     // <editor-fold desc="Attributes">
+    private String name;
     private List<Student> students;
     private List<EnrollmentStatus> studentEnrollmentList;
     private int year;
@@ -15,7 +16,8 @@ public class Class {
     // </editor-fold>
 
     // <editor-fold desc="Constructor">
-    public Class(int year, Course course) {
+    public Class(String name, int year, Course course) {
+        this.name = name;
         this.students = new ArrayList<>();
         this.year = year;
         this.course = course;
@@ -64,6 +66,14 @@ public class Class {
         for (Student student : students) {
             System.out.println("- " + student.getName());
         }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getYear() {

@@ -9,20 +9,15 @@ public class Student {
     private byte age;
     private String email;
     private String phoneNumber;
-
-    private List<Course> courses;
     // </editor-fold>
 
     // <editor-fold desc="Constructor">
     public Student(String name) {
         this.name = name;
-        
-        this.courses = new ArrayList<>();
-
     }
     // </editor-fold>
 
-        // <editor-fold desc="try/catch">
+    // <editor-fold desc="try/catch">
     // Another overload / With try/catch
     public Student(String name, String email, String phoneNumber){
         this.name = name;
@@ -41,7 +36,7 @@ public class Student {
     //Method to validate if the email is correct
     public void validateEmail(String email){
         if (!email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@.+\\..+$")) {
-            throw new IllegalArgumentException("O email é INVALIDO!");
+            throw new IllegalArgumentException("O email informado não é valido!");
         }
     }
     //Method to validate if the Phone is correct
@@ -59,7 +54,6 @@ public class Student {
     public String toString() {
         return "Estudante: "+
                 "Nome: "+ name +
-                ", Cursos: "+ courses +
                 ", Email: "+ email +
                 ", Telefone: "+ phoneNumber;
     }
@@ -69,7 +63,6 @@ public class Student {
     public Student(String name, byte age) {
         this.name = name;
         this.age = age;
-        this.courses = new ArrayList<>();
     }
     // </editor-fold>
 
@@ -98,26 +91,16 @@ public class Student {
     }
 
     /*
-    * Method addCourse - is responsible for adding a new course to the list
-    * */
-    public void addCourse(Course course) {
-        courses.add(course);
-    }
-
-    /*
-     * Method removeCourse - has the responsibility to remove a course from the list
+     * Method getEmail
      * */
-    public void removeCourse(Course course) {
-        courses.remove(course);
+    public String getEmail() {
+        return email;
     }
     /*
-     * Method listCourses - has the responsibility of listing the student's courses
+     * Method setEmail
      * */
-    public void listCourses() {
-        System.out.println("Cursos do aluno " + name + ":");
-        for (Course course : courses) {
-            System.out.println("- " + course.getName());
-        }
+    public void setEmail(String email) {
+        this.email = email;
     }
-    // </editor-fold>
+// </editor-fold>
 }

@@ -1,6 +1,7 @@
 package classes;
 
 import enums.EmployeeLevel;
+import interfaces.IEmployee;
 
 import java.security.InvalidParameterException;
 
