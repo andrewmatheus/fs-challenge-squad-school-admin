@@ -8,6 +8,22 @@ public class StudentsData {
 
     private static ArrayList<Student> studentsList = new ArrayList<>();
 
+    public static ArrayList<Student> getStudentsList() {
+        return studentsList;
+    }
+
+    /*
+     * Method addStudent - get Student by mail.
+     * */
+    public static Student findStudentByMail(String mail) {
+        for (Student student : StudentsData.getStudentsList()) {
+            if (student.getEmail().equalsIgnoreCase(mail)) {
+                return student;
+            }
+        }
+        return null;
+    }
+
     /*
      * Method addStudent - responsible for adding a student to the list.
      * */
