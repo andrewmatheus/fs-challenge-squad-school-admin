@@ -35,13 +35,28 @@ public class ClassesData {
     public static ArrayList<Class> getStudentClasses(Student student) {
         ArrayList<Class> classes = new ArrayList<>();
 
-        for (int i = 0; i < classesList.size(); i++) {
-            Class currentClass = classesList.get(i);
+        for (Class currentClass : classesList) {
             if (currentClass.hasStudent(student)) {
                 classes.add(currentClass);
             }
         }
 
         return classes;
+    }
+
+    public static ArrayList<Class> getClassesWithoutStudent(Student student) {
+        ArrayList<Class> classes = new ArrayList<>();
+
+        for (Class currentClass : classesList) {
+            if (!currentClass.hasStudent(student)) {
+                classes.add(currentClass);
+            }
+        }
+
+        return classes;
+    }
+
+    public static ArrayList<Class> getAllClasses() {
+        return new ArrayList<>(classesList);
     }
 }
