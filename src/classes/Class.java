@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Class {
     // <editor-fold desc="Attributes">
+    private String name;
     private List<Student> students;
     private List<EnrollmentStatus> studentEnrollmentList;
     private int year;
@@ -15,7 +16,8 @@ public class Class {
     // </editor-fold>
 
     // <editor-fold desc="Constructor">
-    public Class(int year, Course course) {
+    public Class(String name, int year, Course course) {
+        this.name = name;
         this.students = new ArrayList<>();
         this.studentEnrollmentList = new ArrayList<>();
         this.year = year;
@@ -83,6 +85,14 @@ public class Class {
         } else {
             throw new InvalidParameterException("Could not set student enrollment status. Student not found.");
         }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getYear() {
