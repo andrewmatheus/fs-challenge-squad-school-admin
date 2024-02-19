@@ -1,6 +1,7 @@
 package data;
 
 import classes.Class;
+import classes.Student;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,5 +30,18 @@ public class ClassesData {
             System.out.println("Invalid ID. Class could not be found.");
             return null;
         }
+    }
+
+    public static ArrayList<Class> getStudentClasses(Student student) {
+        ArrayList<Class> classes = new ArrayList<>();
+
+        for (int i = 0; i < classesList.size(); i++) {
+            Class currentClass = classesList.get(i);
+            if (currentClass.hasStudent(student)) {
+                classes.add(currentClass);
+            }
+        }
+
+        return classes;
     }
 }

@@ -1,8 +1,5 @@
 package classes;
 
-import enums.EnrollmentStatus;
-
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +7,6 @@ public class Class {
     // <editor-fold desc="Attributes">
     private String name;
     private List<Student> students;
-    private List<EnrollmentStatus> studentEnrollmentList;
     private int year;
     private Course course;
     // </editor-fold>
@@ -38,25 +34,18 @@ public class Class {
     /*
      * Method addStudent - is responsible for adding a new student to the list
      * */
-    public void addStudent(Student student, EnrollmentStatus enrollmentStatus) {
-        students.add(student);
-        studentEnrollmentList.add(enrollmentStatus);
-    }
-
     public void addStudent(Student student) {
-        addStudent(student, EnrollmentStatus.ACTIVE);
+        students.add(student);
     }
     /*
      * Method removeStudent - has the responsibility to remove a student from the list
      * */
     public void removeStudent(Student student) {
-        int index = students.indexOf(student);
-        if (index >= 0) {
-            students.remove(index);
-            studentEnrollmentList.remove(index);
-        } else {
-            throw new InvalidParameterException("Could not remove student from class. Student not found.");
-        }
+        students.remove(student);
+    }
+
+    public boolean hasStudent(Student student) {
+        return students.contains(student);
     }
     /*
      * Method listStudents - has the responsibility of listing course students
