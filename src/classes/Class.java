@@ -59,6 +59,10 @@ public class Class {
             throw new InvalidParameterException("Could not remove student from class. Student not found.");
         }
     }
+
+    public boolean hasStudent(Student student) {
+        return students.contains(student);
+    }
     /*
      * Method listStudents - has the responsibility of listing course students
      * */

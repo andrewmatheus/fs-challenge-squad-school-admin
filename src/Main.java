@@ -5,6 +5,7 @@ import classes.Teacher;
 import data.DirectorsData;
 import data.StudentsData;
 import data.TeachersData;
+import menu.StudentActions;
 
 import java.util.Scanner;
 
@@ -144,54 +145,7 @@ public class Main {
      * Method to generate a menu for the logged in student and their available actions
      * */
     public static void menuStudentLogged(Scanner scan, Student student) {
-        try {
-            int optionSelected;
-
-            do {
-
-                System.out.println("\nALUNO: " + student.getName() );
-                System.out.println("+--------------------------------+");
-                System.out.println("|                                |");
-                System.out.println("| (1) - Meu(s) Cursos            |");
-                System.out.println("| (2) - Matricular em novo Curso |");
-                System.out.println("| (3) - Abandonar curso          |");
-                System.out.println("| (4) - Trancar Matrícula        |");
-                System.out.println("| (5) - Ativar Matrícula         |");
-                System.out.println("|                                |");
-                System.out.println("+--------------------------------+");
-                System.out.println("| (0) - Sair                     |");
-                System.out.println("+--------------------------------+");
-                System.out.print  ("Selecione uma opção: "     );
-
-                optionSelected = scan.nextInt();
-
-                switch (optionSelected) {
-                    case 1:
-                        System.out.println("Funcionalidade de listar curso");
-                        break;
-                    case 2:
-                        System.out.println("Funcionalidade de matricular curso (adicionar curso)");
-                        break;
-                    case 3:
-                        System.out.println("Funcionalidade de abandonar curso (remover curso)");
-                        break;
-                    case 4:
-                        System.out.println("Funcionalidade de Trancar matrícula (proprio aluno)");
-                        break;
-                    case 5:
-                        System.out.println("Funcionalidade de Ativar matrícula (proprio aluno)");
-                        break;
-                    case 0:
-                        System.out.println("Deslogado com sucesso!");
-                        break;
-                    default:
-                        System.out.println("Opção selecionada não é válida. Voltando ao menu principal...");
-                }
-            } while (optionSelected != 0);
-
-        } catch (Exception exception) {
-            System.out.println("Opção informada não é válida. Informe um número de acordo com menu.");
-        }
+        StudentActions.menu(scan, student);
     }
 
     /*
