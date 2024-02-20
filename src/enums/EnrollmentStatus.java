@@ -30,13 +30,13 @@ public enum EnrollmentStatus {
     public static String getTranslatedStatusNameFromIndex(int num) {
         for (EnrollmentStatus value : values()) {
             if (value.registrationValue == 1) {
-                return "INICIANTE";
+                return "ATIVO";
             }
             if (value.registrationValue == 2) {
-                return "EXPERIENTE";
+                return "TRANCADO";
             }
             if (value.registrationValue == 3) {
-                return "AVANÇADO";
+                return "GRADUADO";
             }
         }
         return null;
