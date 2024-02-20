@@ -28,8 +28,10 @@ public class StudentActions {
                 System.out.println("+--------------------------------+");
                 System.out.print("Selecione uma opção: ");
 
-                String optionString = scanner.nextLine().strip();
-                optionSelected = Integer.parseInt(optionString);
+//                String optionString = scanner.nextLine().strip();
+//                optionSelected = Integer.parseInt(optionString);
+                optionSelected = scanner.nextInt();
+                scanner.nextLine(); // consumir return
 
                 switch (optionSelected) {
                     case 1:
