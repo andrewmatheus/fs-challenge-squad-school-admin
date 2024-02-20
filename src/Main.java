@@ -1,5 +1,4 @@
 import classes.Director;
-import classes.Employee;
 import classes.Student;
 import classes.Teacher;
 import data.DirectorsData;
@@ -7,8 +6,6 @@ import data.StudentsData;
 import data.TeachersData;
 import menu.StudentActions;
 import utils.Scan;
-
-import java.util.Scanner;
 
 import static utils.Validations.validateEmail;
 public class Main {

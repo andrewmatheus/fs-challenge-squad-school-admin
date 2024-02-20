@@ -6,10 +6,7 @@ import data.ClassesData;
 import enums.EnrollmentStatus;
 import utils.Scan;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 public class StudentActions {
     public static void menu(Student currentStudent) {

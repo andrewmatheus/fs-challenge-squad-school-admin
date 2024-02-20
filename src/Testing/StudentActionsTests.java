@@ -10,8 +10,6 @@ import data.StudentsData;
 import data.TeachersData;
 import menu.StudentActions;
 
-import java.util.Scanner;
-
 public class StudentActionsTests {
     public static void main(String[] args) {
         Teacher teacher1 = new Teacher("Teacher 1", 30, 6000, 5);
