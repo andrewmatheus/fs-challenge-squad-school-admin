@@ -12,10 +12,10 @@ public class Scan {
     }
 
     public static String next() {
-        initializeScanner();
         return nextLine();
     }
     public static String nextLine() {
+        initializeScanner();
         return scanner.nextLine();
     }
 
