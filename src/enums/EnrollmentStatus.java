@@ -26,4 +26,19 @@ public enum EnrollmentStatus {
         }
         return null;
     }
+
+    public static String getTranslatedStatusNameFromIndex(int num) {
+        for (EnrollmentStatus value : values()) {
+            if (value.registrationValue == 1) {
+                return "INICIANTE";
+            }
+            if (value.registrationValue == 2) {
+                return "EXPERIENTE";
+            }
+            if (value.registrationValue == 3) {
+                return "AVANÇADO";
+            }
+        }
+        return null;
+    }
 }

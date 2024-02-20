@@ -27,4 +27,19 @@ public enum EmployeeLevel {
         return null;
     }
 
+    public static String getTranslatedStatusNameFromIndex(int num) {
+        for (EmployeeLevel value : values()) {
+            if (value.levelValue == 1) {
+                return "INICIANTE";
+            }
+            if (value.levelValue == 2) {
+                return "EXPERIENTE";
+            }
+            if (value.levelValue == 3) {
+                return "AVANÇADO";
+            }
+        }
+        return null;
+    }
+
 }
