@@ -32,10 +32,6 @@ public class StudentActionsTests {
         Student student1 = new Student("Student");
         StudentsData.addStudent(student1);
 
-        Scanner scanner = new Scanner(System.in);
-
-        StudentActions.menu(scanner, student1);
-
-        scanner.close();
+        StudentActions.menu(student1);
     }
 }

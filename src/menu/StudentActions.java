@@ -4,6 +4,7 @@ import classes.Class;
 import classes.Student;
 import data.ClassesData;
 import enums.EnrollmentStatus;
+import utils.Scan;
 
 import java.sql.SQLOutput;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class StudentActions {
-    public static void menu(Scanner scanner, Student currentStudent) {
+    public static void menu(Student currentStudent) {
         try {
             int optionSelected;
             do {
@@ -28,23 +29,20 @@ public class StudentActions {
                 System.out.println("+--------------------------------+");
                 System.out.print("Selecione uma opção: ");
 
-//                String optionString = scanner.nextLine().strip();
-//                optionSelected = Integer.parseInt(optionString);
-                optionSelected = scanner.nextInt();
-                scanner.nextLine(); // consumir return
+                optionSelected = Scan.nextInt();
 
                 switch (optionSelected) {
                     case 1:
-                        listClasses(scanner, currentStudent, true);
+                        listClasses(currentStudent, true);
                         break;
                     case 2:
-                        addClassMenu(scanner, currentStudent);
+                        addClassMenu(currentStudent);
                         break;
                     case 3:
-                        removeClassMenu(scanner, currentStudent);
+                        removeClassMenu(currentStudent);
                         break;
                     case 4:
-                        changeEnrollmentMenu(scanner, currentStudent);
+                        changeEnrollmentMenu(currentStudent);
                         break;
                     case 0:
                         System.out.println("Deslogado com sucesso!");
@@ -59,11 +57,11 @@ public class StudentActions {
         }
     }
 
-    private static ArrayList<Class> listClasses(Scanner scanner, Student currentStudent) {
-        return listClasses(scanner, currentStudent, false);
+    private static ArrayList<Class> listClasses(Student currentStudent) {
+        return listClasses(currentStudent, false);
     }
 
-    private static ArrayList<Class> listClasses(Scanner scanner, Student currentStudent, boolean showEnrollment) {
+    private static ArrayList<Class> listClasses(Student currentStudent, boolean showEnrollment) {
         ArrayList<Class> classes = ClassesData.getStudentClasses(currentStudent);
 
         System.out.println("Suas classes:");
@@ -85,7 +83,7 @@ public class StudentActions {
         return classes;
     }
 
-    private static void addClassMenu(Scanner scanner, Student currentStudent) {
+    private static void addClassMenu(Student currentStudent) {
         ArrayList<Class> availableClasses = ClassesData.getClassesWithoutStudent(currentStudent);
 
         if (availableClasses.isEmpty()) {
@@ -103,7 +101,7 @@ public class StudentActions {
         System.out.println("Selecione a classe que deseja ingressar:");
         System.out.println("(em branco para cancelar)");
 
-        String choiceString = scanner.nextLine();
+        String choiceString = Scan.nextLine();
         if (choiceString.isEmpty()) {
             return;
         }
@@ -116,8 +114,8 @@ public class StudentActions {
         }
     }
 
-    private static void removeClassMenu(Scanner scanner, Student currentStudent) {
-        ArrayList<Class> classes = listClasses(scanner, currentStudent);
+    private static void removeClassMenu(Student currentStudent) {
+        ArrayList<Class> classes = listClasses(currentStudent);
 
         if (classes.isEmpty()) {
             return;
@@ -127,7 +125,7 @@ public class StudentActions {
         System.out.println("Escolha uma classe para remover:");
         System.out.println("(em branco para cancelar)");
 
-        String choiceString = scanner.nextLine();
+        String choiceString = Scan.nextLine();
         if (choiceString.isEmpty()) {
             return;
         }
@@ -140,8 +138,8 @@ public class StudentActions {
         }
     }
 
-    private static void changeEnrollmentMenu(Scanner scanner, Student currentStudent) {
-        ArrayList<Class> classes = listClasses(scanner, currentStudent, true);
+    private static void changeEnrollmentMenu(Student currentStudent) {
+        ArrayList<Class> classes = listClasses(currentStudent, true);
 
         if (classes.isEmpty()) {
             return;
@@ -151,20 +149,20 @@ public class StudentActions {
         System.out.println("Escolha uma classe para alterar a matrícula:");
         System.out.println("(em branco para cancelar)");
 
-        String choiceString = scanner.nextLine();
+        String choiceString = Scan.nextLine();
         if (choiceString.isEmpty()) {
             return;
         }
 
         int choice = Integer.parseInt(choiceString) - 1;
         if (choice >= 0 && choice < classes.size()) {
-            changeEnrollmentSubmenu(scanner, currentStudent, classes.get(choice));
+            changeEnrollmentSubmenu(currentStudent, classes.get(choice));
         } else {
             System.out.println("Índice inválido.");
         }
     }
 
-    private static void changeEnrollmentSubmenu(Scanner scanner, Student currentStudent, Class currentClass) {
+    private static void changeEnrollmentSubmenu(Student currentStudent, Class currentClass) {
         EnrollmentStatus currentEnrollmentStatus = currentClass.getEnrollmentStatus(currentStudent);
         System.out.println();
         System.out.println(
@@ -174,7 +172,7 @@ public class StudentActions {
         switch (currentEnrollmentStatus) {
             case ACTIVE:
                 System.out.println("Você deseja trancar a sua matrícula? (s/n)");
-                input = scanner.nextLine().strip().toLowerCase();
+                input = Scan.nextLine().strip().toLowerCase();
                 if (input.equals("s") || input.equals("sim")) {
                     changeEnrollmentStatus(currentStudent, currentClass, EnrollmentStatus.LOCKED);
                     return;
@@ -184,7 +182,7 @@ public class StudentActions {
                 }
             case LOCKED:
                 System.out.println("Você deseja ativar a sua matrícula? (s/n");
-                input = scanner.nextLine().strip().toLowerCase();
+                input = Scan.nextLine().strip().toLowerCase();
                 if (input.equals("s") || input.equals("sim")) {
                     changeEnrollmentStatus(currentStudent, currentClass, EnrollmentStatus.ACTIVE);
                     return;
