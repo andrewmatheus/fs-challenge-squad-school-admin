@@ -1,5 +1,4 @@
 import classes.Director;
-import classes.Employee;
 import classes.Student;
 import classes.Teacher;
 import data.ClassesData;
@@ -7,15 +6,12 @@ import data.DirectorsData;
 import data.StudentsData;
 import data.TeachersData;
 import menu.StudentActions;
-
-import java.util.Scanner;
+import utils.Scan;
 
 import static utils.Validations.validateEmail;
 public class Main {
 
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-
         try {
             int optionSelected;
 
@@ -37,14 +33,14 @@ public class Main {
                 System.out.println("+------------------------------------+");
                 System.out.print  ("Selecione uma opção para acesso: "     );
 
-                optionSelected = scan.nextInt();
+                optionSelected = Scan.nextInt();
 
                 switch (optionSelected) {
                     case 1:
-                        menuStudent(scan);
+                        menuStudent();
                         break;
                     case 2:
-                        menuEmployee(scan);
+                        menuEmployee();
                         break;
                     case 0:
                         System.out.println("Obrigado volte sempre. Universidade Alt F4, finalizada com sucesso!");
@@ -54,7 +50,7 @@ public class Main {
                 }
             } while (optionSelected != 0);
 
-            scan.close();
+            Scan.close();
         } catch (Exception exception) {
             System.out.println("Opção informada não é válida. Informe um número de acordo com menu.");
         }
@@ -64,7 +60,7 @@ public class Main {
     /*
      * student home menu
      * */
-    public static void menuStudent(Scanner scan) {
+    public static void menuStudent() {
         try {
             int optionSelected;
 
@@ -82,14 +78,14 @@ public class Main {
                 System.out.println("+------------------------------+");
                 System.out.print  ("Selecione uma opção: "     );
 
-                optionSelected = scan.nextInt();
+                optionSelected = Scan.nextInt();
 
                 switch (optionSelected) {
                     case 1:
-                        loginStudent(scan);
+                        loginStudent();
                         break;
                     case 2:
-                        addNewStudent(scan, null);
+                        addNewStudent(null);
                         break;
                     case 0:
                         System.out.println("Saindo do painel do aluno ...");
@@ -106,13 +102,13 @@ public class Main {
     /*
      * Student login method
      * */
-    public static void loginStudent(Scanner scan) {
+    public static void loginStudent() {
         try {
             String mail;
 
             do {
                 System.out.println("Digite seu e-mail de acesso: ");
-                mail = scan.next().trim().toLowerCase();
+                mail = Scan.next().trim().toLowerCase();
 
                 if (!mail.trim().isEmpty()) {
                     if (validateEmail(mail)) {
@@ -121,10 +117,10 @@ public class Main {
                         
                         if (student == null) {
                             System.out.println("Aluno(a) não encontrado!");
-                            student = addNewStudent(scan, mail);
+                            student = addNewStudent(mail);
                         }
 
-                        menuStudentLogged(scan, student);
+                        menuStudentLogged(student);
 
                         // caso exista turma aberta perguntar se já deseja se vincular a uma turma existente e realizar matricula
                         // Aqui tem q ter a funcionalidade de matricular numa turma (Cartão novo)
@@ -145,35 +141,35 @@ public class Main {
     /*
      * Method to generate a menu for the logged in student and their available actions
      * */
-    public static void menuStudentLogged(Scanner scan, Student student) {
-        StudentActions.menu(scan, student);
+    public static void menuStudentLogged(Student student) {
+        StudentActions.menu(student);
     }
 
     /*
      * Method for adding a new student
      * */
-    public static Student addNewStudent(Scanner scan, String mail) {
+    public static Student addNewStudent(String mail) {
         System.out.println("+---------------------------------+");
         System.out.println("+         NOVO ALUNO(A)           +");
         System.out.println("+---------------------------------+");
         if (mail == null || mail.isEmpty()) {
             System.out.println("Digite seu e-mail de acesso: ");
-            mail = scan.next().trim().toLowerCase();
+            mail = Scan.next().trim().toLowerCase();
 
             if (!validateEmail(mail) && !mail.trim().isEmpty()) {
                 do  {
                     System.out.println("E-mail inválido! tente novamente.");
                     System.out.println("Digite seu e-mail de acesso: ");
-                    mail = scan.next().toLowerCase();
+                    mail = Scan.next().toLowerCase();
                 } while ((!validateEmail(mail)));
             }
         }
 
         System.out.println("Digite seu nome: ");
-        String nameStudent = scan.next().toLowerCase();
+        String nameStudent = Scan.next().toLowerCase();
         System.out.println("Digite seu telefone: ");
         System.out.println("Exemplo: 48999999999 ");
-        String phoneNumber = scan.next().toLowerCase();
+        String phoneNumber = Scan.next().toLowerCase();
 
         Student newStudent = new Student(nameStudent, mail, phoneNumber);
         StudentsData.addStudent(newStudent);
@@ -186,7 +182,7 @@ public class Main {
     /*
      * employee home menu
      * */
-    public static void menuEmployee(Scanner scan) {
+    public static void menuEmployee() {
         try {
             int optionSelected;
 
@@ -204,14 +200,14 @@ public class Main {
                 System.out.println("+---------------------------------+");
                 System.out.print  ("Selecione uma opção: "     );
 
-                optionSelected = scan.nextInt();
+                optionSelected = Scan.nextInt();
 
                 switch (optionSelected) {
                     case 1:
-                        loginEmployee(scan);
+                        loginEmployee();
                         break;
                     case 2:
-                        addNewEmployee(scan, null, null, "");
+                        addNewEmployee(null, null, "");
                         break;
                     case 0:
                         System.out.println("Saindo do painel do funcionário ...");
@@ -228,12 +224,12 @@ public class Main {
     /*
      * Employee login method
      * */
-    public static void loginEmployee(Scanner scan) {
+    public static void loginEmployee() {
         try {
             String name;
 
             System.out.println("Digite seu nome para acesso: ");
-            name = scan.next();
+            name = Scan.next();
 
             if (name != null && !name.trim().isEmpty()) {
 
@@ -246,14 +242,14 @@ public class Main {
                     if (director == null){
                         System.out.println("Seu nome não foi identificado em nossa base de dados! Realize seu cadastro:");
 
-                        addNewEmployee(scan, null, null, name);
+                        addNewEmployee(null, null, name);
 
                     } else {
-                        menuDirectorLogged(scan, director);
+                        menuDirectorLogged(director);
                     }
 
                 } else {
-                    menuTeacherLogged(scan, teacher);
+                    menuTeacherLogged(teacher);
                 }
 
             } else {
@@ -266,7 +262,7 @@ public class Main {
         }
     }
 
-    public static void addNewEmployee(Scanner scan, Director director, Teacher teacher, String name) {
+    public static void addNewEmployee(Director director, Teacher teacher, String name) {
         try {
             int optionSelected;
 
@@ -283,19 +279,19 @@ public class Main {
 
             System.out.print  ("Selecione uma opção: "     );
 
-            optionSelected = scan.nextInt();
+            optionSelected = Scan.nextInt();
 
             switch (optionSelected) {
                 case 1:
-                    teacher = addNewTeacher(scan, name);
+                    teacher = addNewTeacher(name);
                     if (teacher != null) {
-                        menuTeacherLogged(scan, teacher);
+                        menuTeacherLogged(teacher);
                     }
                     break;
                 case 2:
-                    director = addNewDirector(scan, name);
+                    director = addNewDirector(name);
                     if (director != null) {
-                        menuDirectorLogged(scan, director);
+                        menuDirectorLogged(director);
                     }
                     break;
                 case 0:
@@ -313,7 +309,7 @@ public class Main {
     /*
      * Method to generate a menu for the logged in Teacher and their available actions
      * */
-    public static void menuTeacherLogged(Scanner scan, Teacher teacher) {
+    public static void menuTeacherLogged(Teacher teacher) {
         try {
             int optionSelected;
 
@@ -332,7 +328,7 @@ public class Main {
                 System.out.println("+---------------------------------+");
                 System.out.print  ("Selecione uma opção: "     );
 
-                optionSelected = scan.nextInt();
+                optionSelected = Scan.nextInt();
 
                 switch (optionSelected) {
                     case 1:
@@ -390,7 +386,7 @@ public class Main {
     /*
      * Method to generate a menu for the logged in Director and their available actions
      * */
-    public static void menuDirectorLogged(Scanner scan, Director director) {
+    public static void menuDirectorLogged(Director director) {
         try {
             int optionSelected;
 
@@ -410,7 +406,7 @@ public class Main {
                 System.out.println("+---------------------------------+");
                 System.out.print  ("Selecione uma opção: "     );
 
-                optionSelected = scan.nextInt();
+                optionSelected = Scan.nextInt();
 
                 switch (optionSelected) {
                     case 1:
@@ -441,18 +437,18 @@ public class Main {
     /*
      * Method for adding a new Director
      * */
-    public static Director addNewDirector(Scanner scan, String name) {
+    public static Director addNewDirector(String name) {
 
         try {
             if (name == null || name.isEmpty()) {
                 System.out.println("Digite seu nome de acesso: ");
-                name = scan.next().toLowerCase();
+                name = Scan.next().toLowerCase();
             }
 
             System.out.println("Digite seu salário: ");
-            double salary = scan.nextDouble();
+            double salary = Scan.nextDouble();
             System.out.println("Quantos ano(s) de experiência: ");
-            int employmentYears = scan.nextInt();
+            int employmentYears = Scan.nextInt();
 
             Director newDirector = new Director(name, salary, employmentYears);
             DirectorsData.addDirector(newDirector);
@@ -467,20 +463,20 @@ public class Main {
     /*
      * Method for adding a new Teacher
      * */
-    public static Teacher addNewTeacher(Scanner scan, String name) {
+    public static Teacher addNewTeacher(String name) {
 
         try {
             if (name == null || name.isEmpty()) {
                 System.out.println("Digite seu nome de acesso: ");
-                name = scan.next().toLowerCase();
+                name = Scan.next().toLowerCase();
             }
 
             System.out.println("Quantos ano(s) você tem: ");
-            int age = scan.nextInt();
+            int age = Scan.nextInt();
             System.out.println("Digite seu salário: ");
-            double salary = scan.nextDouble();
+            double salary = Scan.nextDouble();
             System.out.println("Quantos ano(s) de experiência: ");
-            int employmentYears = scan.nextInt();
+            int employmentYears = Scan.nextInt();
 
             Teacher newTeacher = new Teacher(name, age, salary, employmentYears);
             TeachersData.addTeacher(newTeacher);
