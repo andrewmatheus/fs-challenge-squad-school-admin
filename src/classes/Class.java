@@ -91,6 +91,10 @@ public class Class {
         }
     }
 
+    public ArrayList<Student> getStudents(){
+        return new ArrayList<>(this.students);
+    } 
+
     public String getName() {
         return name;
     }

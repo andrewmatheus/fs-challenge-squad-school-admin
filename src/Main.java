@@ -2,6 +2,7 @@ import classes.Director;
 import classes.Employee;
 import classes.Student;
 import classes.Teacher;
+import data.ClassesData;
 import data.DirectorsData;
 import data.StudentsData;
 import data.TeachersData;
@@ -335,14 +336,44 @@ public class Main {
 
                 switch (optionSelected) {
                     case 1:
-                        System.out.println("Funcionalidade de listar alunos");
+                        System.out.println("Lista dos alunos: ");
+                        for (int i = 0; i < StudentsData.getStudentsList().size(); i++) {
+                            System.out.println(i+": "+StudentsData.findStudent(i).getName());
+                        }
                         break;
                     case 2:
-                        System.out.println("Funcionalidade de aluno na minha turma");
+                        System.out.println("Lista das Turmas: ");
+                        for (int i = 0; i < ClassesData.getAllClasses().size(); i++) {
+                            System.out.println(i+": "+ClassesData.findClassById(i));
+                        }
+                        System.out.print("Selecione o ID da Turma para adicionar aluno: ");
+                        int classID = scan.nextInt();
+                        classes.Class class2 = ClassesData.findClassById(classID);
+                        System.out.println("Lista de Alunos:");
+                        for (int i = 0; i < StudentsData.getStudentsList().size(); i++) {
+                            System.out.println(i+": "+StudentsData.findStudent(i).getName());
+                        }
+                        System.out.print("Selecione o ID do Aluno para adicionar à turma: ");
+                        int studentID = scan.nextInt();
+                        classes.Student class3 = StudentsData.findStudent(studentID);
+                        class2.addStudent(class3);
                         break;
                     case 3:
-                        System.out.println("Funcionalidade de remover aluno da turma");
-                        break;
+                        System.out.println("Lista de Turmas:");
+                        for (int i = 0; i < ClassesData.getAllClasses().size(); i++) {
+                            System.out.println(i+": "+ClassesData.findClassById(i));
+                        }
+                        System.out.print("Selecione o ID da Turma para remover aluno: ");
+                        int classID2 = scan.nextInt();
+                        classes.Class class4 = ClassesData.findClassById(classID2);
+                        System.out.println("Lista de Alunos na Turma:");
+                        for (int i = 0; i < class4.getStudents().size(); i++) {
+                            System.out.println(i+": "+class4.getStudents().get(i).getName());
+                        }
+                        System.out.print("Selecione o ID do Aluno para remover da turma: ");
+                        int studantID4 = scan.nextInt();
+                        class4.removeStudent(class4.getStudents().get(studantID4));
+                    break;
                     case 0:
                         System.out.println("Deslogado com sucesso!");
                         break;
