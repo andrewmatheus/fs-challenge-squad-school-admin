@@ -10,8 +10,6 @@ import data.StudentsData;
 import data.TeachersData;
 import menu.StudentActions;
 
-import java.util.Scanner;
-
 public class StudentActionsTests {
     public static void main(String[] args) {
         Teacher teacher1 = new Teacher("Teacher 1", 30, 6000, 5);
@@ -32,10 +30,6 @@ public class StudentActionsTests {
         Student student1 = new Student("Student");
         StudentsData.addStudent(student1);
 
-        Scanner scanner = new Scanner(System.in);
-
-        StudentActions.menu(scanner, student1);
-
-        scanner.close();
+        StudentActions.menu(student1);
     }
 }
