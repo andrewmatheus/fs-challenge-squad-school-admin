@@ -29,7 +29,7 @@ public class Scan {
     public static double nextDouble() {
         initializeScanner();
         double number = scanner.nextDouble();
-        scanner.nextDouble();
+        scanner.nextLine();
         return number;
     }
 
