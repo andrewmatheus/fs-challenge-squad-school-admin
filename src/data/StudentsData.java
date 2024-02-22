@@ -47,11 +47,11 @@ public class StudentsData {
     /*
      * Method findStudent - responsible for finding a student on the list.
      * */
-    public static Student findStudent(int id){
+    public static Student findStudentById(int id){
         if (id >= 0 && id < studentsList.size()) {
             return studentsList.get(id);
         } else {
-            System.out.println("Invalid ID. Student could not be found.");
+            System.out.println("ID inválido. Estudante não encontrado");
             return null;
         }
     }

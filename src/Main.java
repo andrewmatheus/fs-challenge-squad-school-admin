@@ -5,6 +5,7 @@ import classes.Teacher;
 import data.DirectorsData;
 import data.StudentsData;
 import data.TeachersData;
+import menu.DirectorActions;
 import menu.StudentActions;
 
 import java.util.Scanner;
@@ -360,51 +361,7 @@ public class Main {
      * Method to generate a menu for the logged in Director and their available actions
      * */
     public static void menuDirectorLogged(Scanner scan, Director director) {
-        try {
-            int optionSelected;
-
-            do {
-
-                System.out.println("\nFUNCIONÁRIO: " + director.getName() );
-                System.out.println("CARGO: DIRETOR");
-                System.out.println("+---------------------------------+");
-                System.out.println("|                                 |");
-                System.out.println("| (1) - Promover professor        |");
-                System.out.println("| (2) - Adicionar novo professor  |");
-                System.out.println("| (3) - Remover professor         |");
-                System.out.println("| (4) - Relatório geral           |");
-                System.out.println("|                                 |");
-                System.out.println("+---------------------------------+");
-                System.out.println("| (0) - Sair                      |");
-                System.out.println("+---------------------------------+");
-                System.out.print  ("Selecione uma opção: "     );
-
-                optionSelected = scan.nextInt();
-
-                switch (optionSelected) {
-                    case 1:
-                        System.out.println("Funcionalidade de listar alunos");
-                        break;
-                    case 2:
-                        System.out.println("Funcionalidade de adicionar novo professor");
-                        break;
-                    case 3:
-                        System.out.println("Funcionalidade de remover professor");
-                        break;
-                    case 4:
-                        System.out.println("Funcionalidade de  listar todos os professores e todos os alunos, juntos dos ids deles");
-                        break;
-                    case 0:
-                        System.out.println("Deslogado com sucesso!");
-                        break;
-                    default:
-                        System.out.println("Opção selecionada não é válida. Voltando ao menu principal...");
-                }
-            } while (optionSelected != 0);
-
-        } catch (Exception exception) {
-            System.out.println("Opção informada não é válida. Informe um número de acordo com menu.");
-        }
+        DirectorActions.menu(scan, director);
     }
 
     /*

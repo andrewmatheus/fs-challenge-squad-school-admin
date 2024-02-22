@@ -18,14 +18,8 @@ public class TeachersData {
         teachersList.add(professor);
     }
 
-    public static void removeTeacher(int id) {
-        try {
-            Teacher removedTeacher = teachersList.remove(id);
-            System.out.println("Teacher " + removedTeacher.getName() + " successfully removed.");
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Error: " + e.getMessage());
-            System.out.println("Invalid ID. Teacher could not be removed.");
-        }
+    public static void removeTeacherById(int id) {
+        teachersList.remove(id);
     }
 
     public static Teacher findTeacherByName(String name) {

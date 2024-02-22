@@ -1,10 +1,13 @@
 package classes;
 
+import java.util.List;
+
 public class Course {
     // <editor-fold desc="Attributes">
     private String name;
     private Teacher teacher;
     private String courseDescription; //
+    private List<Class> classes; // Lista de objetos Class associados a este curso
     // </editor-fold>
 
     // <editor-fold desc="Constructor">
@@ -20,6 +23,14 @@ public class Course {
         this.courseDescription = courseDescription;
     }
     // </editor-fold>
+
+    public void setClasses(List<Class> classes) {
+        this.classes = classes;
+    }
+
+    public List<Class> getClasses() {
+        return classes;
+    }
 
     // <editor-fold desc="ToString">
     @Override
@@ -58,5 +69,7 @@ public class Course {
     public void setCourseDescription(String courseDescription) {
         this.courseDescription = courseDescription;
     }
+
+
     // </editor-fold>
 }
