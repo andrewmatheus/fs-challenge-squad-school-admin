@@ -6,6 +6,7 @@ import data.DirectorsData;
 import data.StudentsData;
 import data.TeachersData;
 import menu.StudentActions;
+import menu.TeacherActions;
 import utils.Scan;
 
 import static utils.Validations.validateEmail;
@@ -310,77 +311,7 @@ public class Main {
      * Method to generate a menu for the logged in Teacher and their available actions
      * */
     public static void menuTeacherLogged(Teacher teacher) {
-        try {
-            int optionSelected;
-
-            do {
-
-                System.out.println("\nFUNCIONÁRIO: " + teacher.getName() );
-                System.out.println("CARGO: PROFESSOR");
-                System.out.println("+---------------------------------+");
-                System.out.println("|                                 |");
-                System.out.println("| (1) - Listar Alunos             |");
-                System.out.println("| (2) - Adicionar Aluno na turma  |");
-                System.out.println("| (3) - Remover Aluno da turma    |");
-                System.out.println("|                                 |");
-                System.out.println("+---------------------------------+");
-                System.out.println("| (0) - Sair                      |");
-                System.out.println("+---------------------------------+");
-                System.out.print  ("Selecione uma opção: "     );
-
-                optionSelected = Scan.nextInt();
-
-                switch (optionSelected) {
-                    case 1:
-                        System.out.println("Lista dos alunos: ");
-                        for (int i = 0; i < StudentsData.getStudentsList().size(); i++) {
-                            System.out.println(i+": "+StudentsData.findStudent(i).getName());
-                        }
-                        break;
-                    case 2:
-                        System.out.println("Lista das Turmas: ");
-                        for (int i = 0; i < ClassesData.getAllClasses().size(); i++) {
-                            System.out.println(i+": "+ClassesData.findClassById(i));
-                        }
-                        System.out.print("Selecione o ID da Turma para adicionar aluno: ");
-                        int classID = scan.nextInt();
-                        classes.Class class2 = ClassesData.findClassById(classID);
-                        System.out.println("Lista de Alunos:");
-                        for (int i = 0; i < StudentsData.getStudentsList().size(); i++) {
-                            System.out.println(i+": "+StudentsData.findStudent(i).getName());
-                        }
-                        System.out.print("Selecione o ID do Aluno para adicionar à turma: ");
-                        int studentID = scan.nextInt();
-                        classes.Student class3 = StudentsData.findStudent(studentID);
-                        class2.addStudent(class3);
-                        break;
-                    case 3:
-                        System.out.println("Lista de Turmas:");
-                        for (int i = 0; i < ClassesData.getAllClasses().size(); i++) {
-                            System.out.println(i+": "+ClassesData.findClassById(i));
-                        }
-                        System.out.print("Selecione o ID da Turma para remover aluno: ");
-                        int classID2 = scan.nextInt();
-                        classes.Class class4 = ClassesData.findClassById(classID2);
-                        System.out.println("Lista de Alunos na Turma:");
-                        for (int i = 0; i < class4.getStudents().size(); i++) {
-                            System.out.println(i+": "+class4.getStudents().get(i).getName());
-                        }
-                        System.out.print("Selecione o ID do Aluno para remover da turma: ");
-                        int studantID4 = scan.nextInt();
-                        class4.removeStudent(class4.getStudents().get(studantID4));
-                    break;
-                    case 0:
-                        System.out.println("Deslogado com sucesso!");
-                        break;
-                    default:
-                        System.out.println("Opção selecionada não é válida. Voltando ao menu principal...");
-                }
-            } while (optionSelected != 0);
-
-        } catch (Exception exception) {
-            System.out.println("Opção informada não é válida. Informe um número de acordo com menu.");
-        }
+        TeacherActions.menu(teacher);
     }
 
     /*
