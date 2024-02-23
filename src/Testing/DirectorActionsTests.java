@@ -12,6 +12,7 @@ import data.StudentsData;
 import data.TeachersData;
 import enums.EmployeeLevel;
 import menu.DirectorActions;
+import utils.Scan;
 
 import java.util.Scanner;
 
@@ -37,12 +38,9 @@ public class DirectorActionsTests {
         Director director = new Director("Bruno", 15400, 20);
         DirectorsData.addDirector(director);
 
-        Scanner scanner = new Scanner(System.in);
-
         // Passando o diretor para o menu de ações do diretor
-        DirectorActions.menu(scanner, director);
-
-        scanner.close();
+        DirectorActions.menu(director);
+        Scan.close();
     }
 }
 
