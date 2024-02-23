@@ -59,8 +59,4 @@ public class ClassesData {
     public static ArrayList<Class> getAllClasses() {
         return new ArrayList<>(classesList);
     }
-
-    public static List<Class> getClassesList() {
-        return classesList;
-    }
 }

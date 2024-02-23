@@ -1,10 +1,3 @@
-// TODO: 13/02/2024
-//  Create an enum to represent Enrollment Status and add it as an attribute to Student
-//  Values: ACTIVE, LOCKED, FORMED.
-//  Create an enum to represent the Employee Job Title.
-//  Values: Beginner, Experienced, Advanced
-//  Demonstrate the use of values() and valueOf().
-
 package enums;
 
 public enum EmployeeLevel {
@@ -27,4 +20,12 @@ public enum EmployeeLevel {
         return null;
     }
 
+    public static String getTranslatedLevelNameFromIndex(EmployeeLevel status) {
+        switch (status) {
+            case BEGINNER -> {return "Iniciante";}
+            case EXPERIENCED -> {return "Experiente";}
+            case ADVANCED -> {return "Avançado";}
+            default -> {return null;}
+        }
+    }
 }

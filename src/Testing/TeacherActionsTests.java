@@ -8,9 +8,9 @@ import data.ClassesData;
 import data.CoursesData;
 import data.StudentsData;
 import data.TeachersData;
-import menu.StudentActions;
+import menu.TeacherActions;
 
-public class StudentActionsTests {
+public class TeacherActionsTests {
     public static void main(String[] args) {
         Teacher teacher1 = new Teacher("Teacher 1", 30, 6000, 5);
         Teacher teacher2 = new Teacher("Teacher 2", 30, 6000, 5);
@@ -27,9 +27,15 @@ public class StudentActionsTests {
         ClassesData.addClass(class1);
         ClassesData.addClass(class2);
 
-        Student student1 = new Student("Student");
+        Student student1 = new Student("Student1");
+        Student student2 = new Student("Student2");
+        Student student3 = new Student("Student3");
+        Student student4 = new Student("Student4");
         StudentsData.addStudent(student1);
+        StudentsData.addStudent(student2);
+        StudentsData.addStudent(student3);
+        StudentsData.addStudent(student4);
 
-        StudentActions.menu(student1);
+        TeacherActions.menu(teacher1);
     }
 }

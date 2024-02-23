@@ -29,6 +29,7 @@ public class Class {
     @Override
     public String toString() {
         return "Turma: " +
+                "Nome: " + name +
                 "Ano: " + year +
                 ", Curso: " + course.getName() +
                 ", Alunos: " + students.size();
@@ -90,6 +91,10 @@ public class Class {
             throw new InvalidParameterException("Could not set student enrollment status. Student not found.");
         }
     }
+
+    public ArrayList<Student> getStudents(){
+        return new ArrayList<>(this.students);
+    } 
 
     public String getName() {
         return name;

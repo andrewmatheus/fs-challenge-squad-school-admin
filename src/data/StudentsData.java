@@ -1,23 +1,22 @@
 package data;
 
+import classes.Class;
 import classes.Student;
-import enums.EnrollmentStatus;
 
-import java.sql.Array;
 import java.util.ArrayList;
 
 public class StudentsData {
     private static ArrayList<Student> studentsList = new ArrayList<>();
 
-    public static ArrayList<Student> getStudentsList() {
-        return studentsList;
+    public static ArrayList<Student> getAllStudents() {
+        return new ArrayList<>(studentsList);
     }
 
     /*
      * Method addStudent - get Student by mail.
      * */
     public static Student findStudentByMail(String mail) {
-        for (Student student : StudentsData.getStudentsList()) {
+        for (Student student : studentsList) {
             if (student.getEmail().equalsIgnoreCase(mail)) {
                 return student;
             }
@@ -54,5 +53,15 @@ public class StudentsData {
             System.out.println("ID inválido. Estudante não encontrado");
             return null;
         }
+    }
+
+    public static ArrayList<Student> getStudentsNotInClass(Class aClass) {
+        ArrayList<Student> result = new ArrayList<>();
+        for (Student student : studentsList) {
+            if (!aClass.hasStudent(student)) {
+                result.add(student);
+            }
+        }
+        return result;
     }
 }

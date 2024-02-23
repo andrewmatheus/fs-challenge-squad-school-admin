@@ -10,17 +10,19 @@ import data.CoursesData;
 import data.StudentsData;
 import data.TeachersData;
 import enums.EmployeeLevel;
+import utils.Scan;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Scanner;
 
 import static data.TeachersData.removeTeacherById;
 
 
 public class DirectorActions {
 
-    public static void menu(Scanner scan, Director director) {
+    public static void menu(Director director) {
         try {
             int optionSelected;
 
@@ -45,28 +47,28 @@ public class DirectorActions {
                 System.out.println("+-------------------------------------+");
                 System.out.print("Selecione uma opção: ");
 
-                optionSelected = scan.nextInt();
+                optionSelected = Scan.nextInt();
 
                 switch (optionSelected) {
                     case 1:
                         // Promover o cargo de um professor, default BEGINNER.
-                        promoteTeacher(scan);
+                        promoteTeacher();
                         break;
                     case 2:
                         // Adicionar ou remover professor
-                        addRemoveTeacher(scan);
+                        addRemoveTeacher();
                         break;
                     case 3:
                         // Adicionar ou remover aluno
-                        addRemoveStudent(scan);
+                        addRemoveStudent();
                         break;
                     case 4:
                         //Criar um curso
-                        createNewCourse(scan);
+                        createNewCourse();
                         break;
                     case 5:
                         //Criar uma turma
-                        createNewClass(scan);
+                        createNewClass();
                         break;
                     case 6:
 //                        addStudentsToClass(scan); apaguei, não consegui
@@ -76,7 +78,7 @@ public class DirectorActions {
                         break;
                     case 8:
                         // Listar todos os professores e alunos com seus IDs
-                        relatorioGeral(scan);
+                        relatorioGeral();
                         break;
                     case 0:
                         System.out.println("Deslogado com sucesso!");
@@ -94,12 +96,12 @@ public class DirectorActions {
     /*
      * Método para listar todos os professores e estudantes
      * */
-    public static void relatorioGeral(Scanner scan) {
+    public static void relatorioGeral() {
         // Obter listas de professores, alunos e cursos
         List<Teacher> teachers = TeachersData.getTeachersList();
-        List<Student> students = StudentsData.getStudentsList();
+        List<Student> students = StudentsData.getAllStudents();
         //List<Course> courses = CoursesData.getCoursesList();
-        List<Class> classes = ClassesData.getClassesList();
+        List<Class> classes = ClassesData.getAllClasses();
 
         // Exibir todos os professores
         System.out.println("\n------- Professores -------");
@@ -123,8 +125,7 @@ public class DirectorActions {
 
         // Manter o menu ativo
         System.out.println("\nPressione qualquer tecla para voltar ao menu.");
-        scan.nextLine();
-        scan.nextLine();
+        Scan.nextLine();
     }
 
 
@@ -132,7 +133,7 @@ public class DirectorActions {
     /*
      * Method to promote a teacher to the next job level
      * */
-    public static void promoteTeacher(Scanner scan) {
+    public static void promoteTeacher() {
         try {
             // Lista de professores em ordem alfabética
             List<Teacher> teachers = TeachersData.getTeachersList();
@@ -147,7 +148,7 @@ public class DirectorActions {
 
             // Solicitar ao diretor que escolha o índice do professor a ser promovido
             System.out.print("Digite o índice do professor que deseja promover (0 para sair): ");
-            int index = scan.nextInt();
+            int index = Scan.nextInt();
 
             if (index == 0) {
                 System.out.println("Operação cancelada.");
@@ -185,18 +186,18 @@ public class DirectorActions {
         };
     }
 
-    public static void addNewTeacher(Scanner scan) {
+    public static void addNewTeacher() {
         try {
             System.out.println("*** Cadastro do novo professor ***\n");
             System.out.print("Digite o nome: ");
-            String name = scan.next();
+            String name = Scan.next();
 
             System.out.print("Digite a idade: ");
-            int age = scan.nextInt();
+            int age = Scan.nextInt();
             System.out.print("Digite o salário: ");
-            double salary = scan.nextDouble();
+            double salary = Scan.nextDouble();
             System.out.print("Digite os anos de experiência: ");
-            int employmentYears = scan.nextInt();
+            int employmentYears = Scan.nextInt();
 
             Teacher newTeacher = new Teacher(name, age, salary, employmentYears);
             TeachersData.addTeacher(newTeacher);
@@ -209,7 +210,7 @@ public class DirectorActions {
     /*
      * Method to remove a teacher.
      * */
-    public static void removeTeacher(Scanner scan) {
+    public static void removeTeacher() {
         try {
             // Lista de professores em ordem alfabética
             List<Teacher> teachers = TeachersData.getTeachersList();
@@ -224,7 +225,7 @@ public class DirectorActions {
 
             // Solicitar ao diretor que escolha o índice do professor a ser removido
             System.out.print("Digite o índice do professor que deseja remover: ");
-            int index = scan.nextInt();
+            int index = Scan.nextInt();
 
             // Remover o professor utilizando o método da classe TeachersData
             removeTeacherById(index -1);
@@ -233,19 +234,19 @@ public class DirectorActions {
         }
     }
 
-    public static void addRemoveTeacher(Scanner scanner) {
+    public static void addRemoveTeacher() {
         try {
             System.out.println("*** Adicionar ou remover professor ***\n");
             System.out.println("Escolha uma opção:");
             System.out.println("1. Adicionar novo professor");
             System.out.println("2. Remover professor existente");
             System.out.print("Opção: ");
-            int option = scanner.nextInt();
+            int option = Scan.nextInt();
 
             if (option == 1) {
-                addNewTeacher(scanner);
+                addNewTeacher();
             } else if (option == 2) {
-                removeTeacher(scanner);
+                removeTeacher();
             } else {
                 System.out.println("Opção inválida. Por favor, escolha 1 ou 2.");
             }
@@ -256,7 +257,7 @@ public class DirectorActions {
     /*
      * Method to create a new Course. A registered Teacher is linked to the new Course
      * */
-    public static void createNewCourse(Scanner scan) {
+    public static void createNewCourse() {
         try {
             List<Teacher> teachers = TeachersData.getTeachersList();
 
@@ -264,9 +265,9 @@ public class DirectorActions {
                 System.out.println("Nenhum professor cadastrado.");
                 System.out.println("Por favor, adicione um novo professor antes de criar um curso.");
                 System.out.print("Deseja adicionar um novo professor? (S/N)");
-                String option = scan.next();
+                String option = Scan.next();
                 if (option.equalsIgnoreCase("S")) {
-                    addNewTeacher(scan);
+                    addNewTeacher();
                     // Recarregar a lista de professores
                     teachers = TeachersData.getTeachersList();
                 } else {
@@ -276,7 +277,7 @@ public class DirectorActions {
             }
 
             System.out.print("Digite o nome do novo curso: ");
-            String courseName = scan.next();
+            String courseName = Scan.next();
 
             System.out.println("Lista de Professores Disponíveis:");
             for (int i = 0; i < teachers.size(); i++) {
@@ -284,8 +285,7 @@ public class DirectorActions {
             }
 
             System.out.print("Selecione o número do professor para este curso: ");
-            int selectedTeacherIndex = scan.nextInt();
-            scan.nextLine(); // Consumir a nova linha pendente
+            int selectedTeacherIndex = Scan.nextInt();
 
             if (selectedTeacherIndex >= 1 && selectedTeacherIndex <= teachers.size()) {
                 Teacher selectedTeacher = teachers.get(selectedTeacherIndex - 1);
@@ -302,17 +302,17 @@ public class DirectorActions {
         }
     }
 
-    public static void addNewStudent(Scanner scan) {
+    public static void addNewStudent() {
         try {
             System.out.println("*** Cadastro do novo aluno ***\n");
             System.out.print("Digite o nome: ");
-            String name = scan.next();
+            String name = Scan.next();
 
             System.out.print("Digite o e-mail: ");
-            String email = scan.next();
+            String email = Scan.next();
 
             System.out.print("Digite o número de telefone: ");
-            String phoneNumber = scan.next();
+            String phoneNumber = Scan.next();
 
             Student newStudent = new Student(name, email, phoneNumber);
             StudentsData.addStudent(newStudent);
@@ -322,12 +322,12 @@ public class DirectorActions {
         }
     }
 
-    public static void removeStudent(Scanner scanner) {
+    public static void removeStudent() {
         try {
             System.out.println("*** Remoção de aluno ***\n");
 
             // Listar todos os estudantes antes de remover
-            List<Student> students = StudentsData.getStudentsList();
+            List<Student> students = StudentsData.getAllStudents();
             System.out.println("Lista de estudantes:");
             for (int i = 0; i < students.size(); i++) {
                 Student student = students.get(i);
@@ -335,7 +335,7 @@ public class DirectorActions {
             }
 
             System.out.print("Digite o ID do aluno a ser removido (0 para cancelar): ");
-            int StudentId = scanner.nextInt();
+            int StudentId = Scan.nextInt();
 
             if (StudentId == 0) {
                 return; // Cancelar a operação se o usuário digitar 0
@@ -357,19 +357,19 @@ public class DirectorActions {
 
 
 
-    public static void addRemoveStudent(Scanner scan) {
+    public static void addRemoveStudent() {
         try {
             System.out.println("*** Adicionar ou remover aluno ***\n");
             System.out.println("Escolha uma opção:");
             System.out.println("1. Adicionar novo aluno");
             System.out.println("2. Remover aluno existente");
             System.out.print("Opção: ");
-            int option = scan.nextInt();
+            int option = Scan.nextInt();
 
             if (option == 1) {
-                addNewStudent(scan);
+                addNewStudent();
             } else if (option == 2) {
-                removeStudent(scan);
+                removeStudent();
             } else {
                 System.out.println("Opção inválida. Por favor, escolha 1 ou 2.");
             }
@@ -378,10 +378,10 @@ public class DirectorActions {
         }
     }
 
-    public static void createNewClass(Scanner scan) {
+    public static void createNewClass() {
         try {
             // Obter a lista de turmas cadastradas
-            List<Class> existingClasses = ClassesData.getClassesList();
+            ArrayList<Class> existingClasses = ClassesData.getAllClasses();
 
             // Se houver turmas cadastradas, imprimir a lista
             if (!existingClasses.isEmpty()) {
@@ -395,12 +395,10 @@ public class DirectorActions {
             }
 
             System.out.print("Digite o nome da nova turma: ");
-            String className = scan.next();
-            scan.nextLine(); // Consumir a nova linha pendente
+            String className = Scan.next();
 
             System.out.print("Digite o ano da turma: ");
-            int year = scan.nextInt();
-            scan.nextLine(); // Consumir a nova linha pendente
+            int year = Scan.nextInt();
 
             // Obter a lista de cursos disponíveis
             List<Course> courses = CoursesData.getCoursesList();
@@ -408,7 +406,7 @@ public class DirectorActions {
             if (courses.isEmpty()) {
                 // Se não houver cursos cadastrados, pedir para criar um novo curso
                 System.out.print("\nNão há cursos cadastrados. Por favor, crie um novo curso.\n");
-                createNewCourse(scan);
+                createNewCourse();
                 // Depois de criar um novo curso, recarregar a lista de cursos
                 courses = CoursesData.getCoursesList();
             }
@@ -422,12 +420,11 @@ public class DirectorActions {
                 System.out.println("0. Criar um novo curso");
 
                 System.out.print("Selecione o número do curso para esta turma (ou 0 para criar um novo): ");
-                int selectedCourseIndex = scan.nextInt();
-                scan.nextLine(); // Consumir a nova linha pendente
+                int selectedCourseIndex = Scan.nextInt();
 
                 if (selectedCourseIndex == 0) {
                     // Criar um novo curso
-                    createNewCourse(scan);
+                    createNewCourse();
                     // Após criar um novo curso, recarregar a lista de cursos
                 } else if (selectedCourseIndex >= 1 && selectedCourseIndex <= courses.size()) {
                     Course selectedCourse = courses.get(selectedCourseIndex - 1);
