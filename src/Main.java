@@ -1,10 +1,12 @@
 import classes.Director;
 import classes.Student;
 import classes.Teacher;
+import data.ClassesData;
 import data.DirectorsData;
 import data.StudentsData;
 import data.TeachersData;
 import menu.StudentActions;
+import menu.TeacherActions;
 import utils.Scan;
 
 import static utils.Validations.validateEmail;
@@ -309,47 +311,7 @@ public class Main {
      * Method to generate a menu for the logged in Teacher and their available actions
      * */
     public static void menuTeacherLogged(Teacher teacher) {
-        try {
-            int optionSelected;
-
-            do {
-
-                System.out.println("\nFUNCIONÁRIO: " + teacher.getName() );
-                System.out.println("CARGO: PROFESSOR");
-                System.out.println("+---------------------------------+");
-                System.out.println("|                                 |");
-                System.out.println("| (1) - Listar Alunos             |");
-                System.out.println("| (2) - Adicionar Aluno na turma  |");
-                System.out.println("| (3) - Remover Aluno da turma    |");
-                System.out.println("|                                 |");
-                System.out.println("+---------------------------------+");
-                System.out.println("| (0) - Sair                      |");
-                System.out.println("+---------------------------------+");
-                System.out.print  ("Selecione uma opção: "     );
-
-                optionSelected = Scan.nextInt();
-
-                switch (optionSelected) {
-                    case 1:
-                        System.out.println("Funcionalidade de listar alunos");
-                        break;
-                    case 2:
-                        System.out.println("Funcionalidade de aluno na minha turma");
-                        break;
-                    case 3:
-                        System.out.println("Funcionalidade de remover aluno da turma");
-                        break;
-                    case 0:
-                        System.out.println("Deslogado com sucesso!");
-                        break;
-                    default:
-                        System.out.println("Opção selecionada não é válida. Voltando ao menu principal...");
-                }
-            } while (optionSelected != 0);
-
-        } catch (Exception exception) {
-            System.out.println("Opção informada não é válida. Informe um número de acordo com menu.");
-        }
+        TeacherActions.menu(teacher);
     }
 
     /*
