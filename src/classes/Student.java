@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Student {
     // <editor-fold desc="Attributes">
+    private int id;
     private String name;
     private byte age;
     private String email;
@@ -31,6 +32,9 @@ public class Student {
         }catch (IllegalArgumentException e){
             System.out.println("Erro: "+e.getMessage());
         }
+    }
+    public Student(int id){
+        this.id = id;
     }
 
     //Method to validate if the email is correct
@@ -101,6 +105,10 @@ public class Student {
      * */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getId() {
+        return id;
     }
 // </editor-fold>
 }

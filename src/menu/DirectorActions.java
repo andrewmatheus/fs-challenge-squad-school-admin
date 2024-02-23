@@ -219,7 +219,7 @@ public class DirectorActions {
             System.out.println("Lista de Professores:");
             for (int i = 0; i < teachers.size(); i++) {
                 Teacher teacher = teachers.get(i);
-                System.out.println("Índice " + i + ": " + teacher.getName() + " - Cargo: " + teacher.getJobLevel() + ", Experiência: " + teacher.getEmploymentYears() + " anos");
+                System.out.println("Índice " + (i + 1) + ": " + teacher.getName() + " - Cargo: " + teacher.getJobLevel() + ", Experiência: " + teacher.getEmploymentYears() + " anos");
             }
 
             // Solicitar ao diretor que escolha o índice do professor a ser removido
@@ -227,7 +227,7 @@ public class DirectorActions {
             int index = scan.nextInt();
 
             // Remover o professor utilizando o método da classe TeachersData
-            removeTeacherById(index);
+            removeTeacherById(index -1);
         } catch (Exception e) {
             System.out.println("Erro ao remover o professor: " + e.getMessage());
         }
@@ -331,27 +331,30 @@ public class DirectorActions {
             System.out.println("Lista de estudantes:");
             for (int i = 0; i < students.size(); i++) {
                 Student student = students.get(i);
-                System.out.println("ID: " + i + ", Nome: " + student.getName());
+                System.out.println("ID: " + (i + 1) + ", Nome: " + student.getName());
             }
 
             System.out.print("Digite o ID do aluno a ser removido (0 para cancelar): ");
-            int studentId = scanner.nextInt();
+            int StudentId = scanner.nextInt();
 
-            if (studentId == 0) {
+            if (StudentId == 0) {
                 return; // Cancelar a operação se o usuário digitar 0
             }
 
-            Student studentToRemove = StudentsData.findStudentById(studentId);
-            if (studentToRemove != null) {
-                StudentsData.removeStudent(studentId);
+            // Verificar se o índice do aluno é válido
+            if (StudentId > 0 && StudentId <= students.size()) {
+                students.remove(StudentId - 1); // Remover o aluno da lista
                 System.out.println("\nAluno removido com sucesso!");
             } else {
-                System.out.println("\nAluno não encontrado. Verifique o ID e tente novamente.");
+                System.out.println("\nID do aluno inválido. Verifique e tente novamente.");
             }
         } catch (Exception exception) {
             System.out.println("\nNão foi possível remover o aluno! Tente novamente.");
         }
     }
+
+
+
 
 
     public static void addRemoveStudent(Scanner scan) {
