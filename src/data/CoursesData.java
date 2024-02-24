@@ -30,4 +30,8 @@ public class CoursesData {
             return null;
         }
     }
+    // Método adicionado para implementar a funcionalidade do relatório geral
+    public static List<Course> getCoursesList() {
+        return coursesList;
+    }
 }

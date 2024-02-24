@@ -59,7 +59,7 @@ public class TeacherActions {
         }
     }
 
-    private static void listStudentsInClassMenu() {
+    public static void listStudentsInClassMenu() {
         ArrayList<Class> classes = ClassesData.getAllClasses();
         listClasses(classes);
 
@@ -88,7 +88,7 @@ public class TeacherActions {
         listStudents(students);
     }
 
-    private static void addStudentToClassMenu() {
+    public static void addStudentToClassMenu() {
         ArrayList<Class> classes = ClassesData.getAllClasses();
         listClasses(classes);
 
@@ -139,7 +139,7 @@ public class TeacherActions {
         selectedClass.addStudent(selectedStudent);
     }
 
-    private static void removeStudentFromClassMenu() {
+    public static void removeStudentFromClassMenu() {
         ArrayList<Class> classes = ClassesData.getAllClasses();
         listClasses(classes);
 

@@ -9,6 +9,7 @@ import data.CoursesData;
 import data.StudentsData;
 import data.TeachersData;
 import menu.StudentActions;
+import utils.Scan;
 
 public class StudentActionsTests {
     public static void main(String[] args) {
@@ -31,5 +32,6 @@ public class StudentActionsTests {
         StudentsData.addStudent(student1);
 
         StudentActions.menu(student1);
+        Scan.close();
     }
 }
