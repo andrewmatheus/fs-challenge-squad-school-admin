@@ -20,7 +20,7 @@ public enum EmployeeLevel {
         return null;
     }
 
-    public static String getTranslatedLevelNameFromIndex(EmployeeLevel status) {
+    public static String getTranslated(EmployeeLevel status) {
         switch (status) {
             case BEGINNER -> {return "Iniciante";}
             case EXPERIENCED -> {return "Experiente";}

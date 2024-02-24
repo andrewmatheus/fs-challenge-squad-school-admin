@@ -1,16 +1,15 @@
 package data;
 
-import classes.Student;
 import classes.Teacher;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TeachersData {
-    private static List<Teacher> teachersList = new ArrayList<>();
+    private static ArrayList<Teacher> teachersList = new ArrayList<>();
 
-    public static List<Teacher> getTeachersList() {
-        return teachersList;
+    public static ArrayList<Teacher> getAllTeachers() {
+        return new ArrayList<>(teachersList);
     }
 
 
@@ -23,7 +22,7 @@ public class TeachersData {
     }
 
     public static Teacher findTeacherByName(String name) {
-        for (Teacher teacher : TeachersData.getTeachersList()) {
+        for (Teacher teacher : TeachersData.getAllTeachers()) {
             if (teacher.getName().equalsIgnoreCase(name)) {
                 return teacher;
             }

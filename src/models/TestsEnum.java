@@ -21,7 +21,7 @@ public class TestsEnum {
             EmployeeLevel employeeLevel = EmployeeLevel.valueOf(level);
             System.out.println("Employee level: " + employeeLevel);
             // apenas fixando o EmployeeLevel.EXPERIENCED na linha abaixo, para testar a execução
-            System.out.println(EmployeeLevel.getTranslatedLevelNameFromIndex(EmployeeLevel.valueOf(level)));
+            System.out.println(EmployeeLevel.getTranslated(EmployeeLevel.valueOf(level)));
 
         } catch (IllegalArgumentException e) {
             System.out.println("-->  INVALID LEVEL !!!  <--");

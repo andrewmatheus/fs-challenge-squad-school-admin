@@ -45,8 +45,14 @@ public class Employee implements IEmployee {
 
     @Override
     public void promotion() {
-        increaseSalary();
-        setJobLevel(nextJobLevel(jobLevel));
+        if (canBePromoted()) {
+            increaseSalary();
+            setJobLevel(nextJobLevel(jobLevel));
+        }
+    }
+
+    public boolean canBePromoted() {
+        return nextJobLevel(jobLevel) != null;
     }
 
     public void increaseSalary(double percentIncrease) {
@@ -78,15 +84,11 @@ public class Employee implements IEmployee {
     // next job level
 
     private EmployeeLevel nextJobLevel(EmployeeLevel currentJob){
-        switch (currentJob) {
-            case BEGINNER:
-                return EmployeeLevel.EXPERIENCED;
-            case EXPERIENCED:
-                return EmployeeLevel.ADVANCED;
-            case ADVANCED:
-                System.out.println(getName()+", atingiu cargo mais alto "+EmployeeLevel.ADVANCED);
-        }
-        return currentJob;
+        return switch (currentJob) {
+            case BEGINNER -> EmployeeLevel.EXPERIENCED;
+            case EXPERIENCED -> EmployeeLevel.ADVANCED;
+            default -> null;
+        };
     }
 
     // Getter and setter methods for name, employmentYears and salary

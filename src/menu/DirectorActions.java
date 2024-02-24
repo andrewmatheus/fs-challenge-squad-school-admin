@@ -12,7 +12,6 @@ import data.TeachersData;
 import enums.EmployeeLevel;
 import utils.Scan;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -37,10 +36,10 @@ public class DirectorActions {
                 System.out.println("| (3)  - Adicionar/Remover aluno      |");
                 System.out.println("| (4)  - Criar um Curso               |");
                 System.out.println("| (5)  - Criar uma turma              |");
-                System.out.println("| (6)  -                              |");
-                System.out.println("| (7)  -                              |");
-                System.out.println("| (8)  - Relatório geral              |");
-                System.out.println("| (10) -                              |");
+                System.out.println("| (6)  - Listar Alunos na turma       |");
+                System.out.println("| (7)  - Adicionar Aluno na turma     |");
+                System.out.println("| (8)  - Remover Aluno da turma       |");
+                System.out.println("| (9)  - Relatório geral              |");
                 System.out.println("|                                     |");
                 System.out.println("+-------------------------------------+");
                 System.out.println("| (0) - Sair                          |");
@@ -71,12 +70,18 @@ public class DirectorActions {
                         createNewClass();
                         break;
                     case 6:
-//                        addStudentsToClass(scan); apaguei, não consegui
-//                        break;
+                        // Listar ALunos na turma
+                        TeacherActions.listStudentsInClassMenu();
+                        break;
                     case 7:
-                        //Lista alunos de uma turma TODO colocar no relatório
+                        // Adicionar Aluno na turma
+                        TeacherActions.addStudentToClassMenu();
                         break;
                     case 8:
+                        // Remover ALuno da Turma
+                        TeacherActions.removeStudentFromClassMenu();
+                        break;
+                    case 9:
                         // Listar todos os professores e alunos com seus IDs
                         relatorioGeral();
                         break;
@@ -98,7 +103,7 @@ public class DirectorActions {
      * */
     public static void relatorioGeral() {
         // Obter listas de professores, alunos e cursos
-        List<Teacher> teachers = TeachersData.getTeachersList();
+        List<Teacher> teachers = TeachersData.getAllTeachers();
         List<Student> students = StudentsData.getAllStudents();
         //List<Course> courses = CoursesData.getCoursesList();
         List<Class> classes = ClassesData.getAllClasses();
@@ -106,13 +111,15 @@ public class DirectorActions {
         // Exibir todos os professores
         System.out.println("\n------- Professores -------");
         for (Teacher teacher : teachers) {
-            System.out.println("ID: " + teachers.indexOf(teacher) + ", " + teacher.toString());
+            int index = teachers.indexOf(teacher) + 1;
+            System.out.println(index + ". " + teacher.toString());
         }
 
         // Exibir todos os alunos
         System.out.println("\n------- Alunos -------");
         for (Student student : students) {
-            System.out.println("ID: " + students.indexOf(student) + ", " + student.toString());
+            int index = students.indexOf(student);
+            System.out.println(index + ". " + student.toString());
         }
 
         // Exibir todos os cursos e turmas com seus respectivos professores
@@ -136,15 +143,11 @@ public class DirectorActions {
     public static void promoteTeacher() {
         try {
             // Lista de professores em ordem alfabética
-            List<Teacher> teachers = TeachersData.getTeachersList();
+            List<Teacher> teachers = TeachersData.getAllTeachers();
             teachers.sort(Comparator.comparing(Teacher::getName));
 
             // Exibindo a lista de professores com índices, cargos e experiência
-            System.out.println("Lista de Professores:");
-            for (int i = 0; i < teachers.size(); i++) {
-                Teacher teacher = teachers.get(i);
-                System.out.println("Índice " + i + ": " + teacher.getName() + " - Cargo: " + teacher.getJobLevel() + ", Experiência: " + teacher.getEmploymentYears() + " anos");
-            }
+            listTeachers(teachers);
 
             // Solicitar ao diretor que escolha o índice do professor a ser promovido
             System.out.print("Digite o índice do professor que deseja promover (0 para sair): ");
@@ -157,13 +160,11 @@ public class DirectorActions {
 
             if (index > 0 && index <= teachers.size()) {
                 Teacher teacher = teachers.get(index - 1); // Ajuste o índice para começar em 1
-                EmployeeLevel currentLevel = teacher.getJobLevel();
-                EmployeeLevel nextLevel = getNextJobLevel(currentLevel);
 
-                if (nextLevel != null) {
+                if (teacher.canBePromoted()) {
                     teacher.promotion();
-                    teacher.setJobLevel(nextLevel);
-                    System.out.println("Professor " + teacher.getName() + " promovido para " + nextLevel);
+                    String level = EmployeeLevel.getTranslated(teacher.getJobLevel());
+                    System.out.println("Professor " + teacher.getName() + " promovido para " + level + ".");
                 } else {
                     System.out.println("O professor " + teacher.getName() + " já atingiu o cargo mais alto.");
                 }
@@ -175,18 +176,20 @@ public class DirectorActions {
         }
     }
 
-    /*
-     * Método para obter o próximo nível de cargo do funcionário
-     * */
-    public static EmployeeLevel getNextJobLevel(EmployeeLevel currentJobLevel) {
-        return switch (currentJobLevel) {
-            case BEGINNER -> EmployeeLevel.EXPERIENCED;
-            case EXPERIENCED -> EmployeeLevel.ADVANCED;
-            case ADVANCED -> null; // O professor "x" já atingiu o cargo mais alto.
-        };
+    private static void listTeachers(List<Teacher> teachers) {
+        System.out.println("Lista de Professores:");
+        for (int i = 0; i < teachers.size(); i++) {
+            Teacher teacher = teachers.get(i);
+            int index = i + 1;
+            String name = teacher.getName();
+            String level = " - Cargo: " + EmployeeLevel.getTranslated(teacher.getJobLevel());
+            String experience = ", Experiência: " + teacher.getEmploymentYears() + " anos.";
+            System.out.println(index + ": " + name + level + experience);
+        }
     }
 
     public static void addNewTeacher() {
+        // método duplicado na Main
         try {
             System.out.println("*** Cadastro do novo professor ***\n");
             System.out.print("Digite o nome: ");
@@ -213,15 +216,11 @@ public class DirectorActions {
     public static void removeTeacher() {
         try {
             // Lista de professores em ordem alfabética
-            List<Teacher> teachers = TeachersData.getTeachersList();
+            List<Teacher> teachers = TeachersData.getAllTeachers();
             teachers.sort(Comparator.comparing(Teacher::getName));
 
             // Exibindo a lista de professores com índices
-            System.out.println("Lista de Professores:");
-            for (int i = 0; i < teachers.size(); i++) {
-                Teacher teacher = teachers.get(i);
-                System.out.println("Índice " + (i + 1) + ": " + teacher.getName() + " - Cargo: " + teacher.getJobLevel() + ", Experiência: " + teacher.getEmploymentYears() + " anos");
-            }
+            listTeachers(teachers);
 
             // Solicitar ao diretor que escolha o índice do professor a ser removido
             System.out.print("Digite o índice do professor que deseja remover: ");
@@ -259,7 +258,7 @@ public class DirectorActions {
      * */
     public static void createNewCourse() {
         try {
-            List<Teacher> teachers = TeachersData.getTeachersList();
+            List<Teacher> teachers = TeachersData.getAllTeachers();
 
             if (teachers.isEmpty()) {
                 System.out.println("Nenhum professor cadastrado.");
@@ -269,7 +268,7 @@ public class DirectorActions {
                 if (option.equalsIgnoreCase("S")) {
                     addNewTeacher();
                     // Recarregar a lista de professores
-                    teachers = TeachersData.getTeachersList();
+                    teachers = TeachersData.getAllTeachers();
                 } else {
                     System.out.println("Operação cancelada.");
                     return;
@@ -303,6 +302,7 @@ public class DirectorActions {
     }
 
     public static void addNewStudent() {
+        // metodo duplicado na Main
         try {
             System.out.println("*** Cadastro do novo aluno ***\n");
             System.out.print("Digite o nome: ");
@@ -352,10 +352,6 @@ public class DirectorActions {
             System.out.println("\nNão foi possível remover o aluno! Tente novamente.");
         }
     }
-
-
-
-
 
     public static void addRemoveStudent() {
         try {
@@ -442,5 +438,4 @@ public class DirectorActions {
             System.out.println("\nErro ao criar a turma: " + e.getMessage());
         }
     }
-
 }
