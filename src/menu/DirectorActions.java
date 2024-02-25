@@ -229,43 +229,69 @@ public class DirectorActions {
      * Method to remove a teacher.
      * */
     public static void removeTeacher() {
-        try {
-            // Lista de professores em ordem alfabética
-            List<Teacher> teachers = TeachersData.getAllTeachers();
-            teachers.sort(Comparator.comparing(Teacher::getName));
 
-            // Exibindo a lista de professores com índices
-            listTeachers(teachers);
+        boolean opcaoValida = false;
 
-            // Solicitar ao diretor que escolha o índice do professor a ser removido
-            System.out.print("Digite o índice do professor que deseja remover: ");
-            int index = Scan.nextInt();
+        while (!opcaoValida) {
+            try {
+                // Obter lista de professores
+                List<Teacher> teachers = TeachersData.getAllTeachers();
 
-            // Remover o professor utilizando o método da classe TeachersData
-            removeTeacherById(index -1);
-        } catch (Exception e) {
-            System.out.println("Erro ao remover o professor: " + e.getMessage());
+                // Exibindo a lista de professores com índices
+                listTeachers(teachers);
+
+                // Solicitar ao diretor que escolha o índice do professor a ser removido
+                System.out.print("Digite o índice do professor que deseja remover: ");
+                String input = Scan.nextLine();
+                int index = Integer.parseInt(input);
+
+                // Verificar se o índice é válido
+                if (index >= 1 && index <= teachers.size()) {
+                    // Remover o professor utilizando o método da classe TeachersData
+                    removeTeacherById(index - 1);
+                    opcaoValida = true; // Sai do loop se a opção for válida
+                } else {
+                    System.out.println("Índice inválido. Por favor, digite um índice da lista.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Erro ao executar a ação. Por favor, insira um número válido.");
+            } catch (Exception e) {
+                System.out.println("Erro ao executar a ação. Tente novamente.");
+            }
         }
     }
 
     public static void addRemoveTeacher() {
-        try {
-            System.out.println("*** Adicionar ou remover professor ***\n");
-            System.out.println("Escolha uma opção:");
-            System.out.println("1. Adicionar novo professor");
-            System.out.println("2. Remover professor existente");
-            System.out.print("Opção: ");
-            int option = Scan.nextInt();
 
-            if (option == 1) {
-                addNewTeacher();
-            } else if (option == 2) {
-                removeTeacher();
-            } else {
-                System.out.println("Opção inválida. Por favor, escolha 1 ou 2.");
+        boolean opcaoValida = false;
+        while (!opcaoValida) {
+            try {
+                System.out.println("*** Adicionar ou remover professor ***\n");
+                System.out.println("Escolha uma opção:");
+                System.out.println("1. Adicionar novo professor");
+                System.out.println("2. Remover professor existente");
+                System.out.println("0. Sair");
+                System.out.print("Opção: ");
+                String input = Scan.nextLine();
+                int option = Integer.parseInt(input);
+
+                if (option == 1) {
+                    addNewTeacher();
+                    opcaoValida = true;
+                } else if (option == 2) {
+                    removeTeacher();
+                    opcaoValida = true;
+                } else if (option == 0) {
+                    System.out.println("Saindo...");
+                    opcaoValida = true; // Saímos do loop
+                } else {
+                    System.out.println("Opção inválida. Por favor, escolha 0, 1 ou 2.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Erro ao executar a ação. Por favor, insira um número válido.");
+            } catch (Exception e) {
+                System.out.println("Erro ao executar a ação. Tente novamente.");
             }
-        } catch (Exception e) {
-            System.out.println("Erro ao executar a ação. Tente novamente.");
         }
     }
     /*
