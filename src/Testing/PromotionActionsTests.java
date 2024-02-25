@@ -6,7 +6,14 @@ import classes.Employee;
 import classes.Teacher;
 import interfaces.IEmployee;
 
-public class promotion {
+public class PromotionActionsTests {
+
+    /**
+     * Class PromotionActionsTests
+     * test features and assist development.
+     * Decided as a team for internal development only, left for study purposes
+     * */
+
     public static void main(String[] args) {
         IEmployee employee = new Employee("Fulano", 3000.0, 2);
         System.out.println("Antes da promoção: " + employee);

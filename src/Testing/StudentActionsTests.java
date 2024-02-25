@@ -12,6 +12,13 @@ import menu.StudentActions;
 import utils.Scan;
 
 public class StudentActionsTests {
+
+    /**
+     * Class StudentActionsTests
+     * test features and assist development.
+     * Decided as a team for internal development only, left for study purposes
+     * */
+
     public static void main(String[] args) {
         Teacher teacher1 = new Teacher("Teacher 1", 30, 6000, 5);
         Teacher teacher2 = new Teacher("Teacher 2", 30, 6000, 5);

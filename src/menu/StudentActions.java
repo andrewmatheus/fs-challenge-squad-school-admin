@@ -22,7 +22,7 @@ public class StudentActions {
                 System.out.println("| (4) - Alterar Matrícula        |");
                 System.out.println("|                                |");
                 System.out.println("+--------------------------------+");
-                System.out.println("| (0) - Sair                     |");
+                System.out.println("| (0) - Voltar para o Login      |");
                 System.out.println("+--------------------------------+");
                 System.out.print("Selecione uma opção: ");
 
@@ -61,7 +61,7 @@ public class StudentActions {
     private static ArrayList<Class> listClasses(Student currentStudent, boolean showEnrollment) {
         ArrayList<Class> classes = ClassesData.getStudentClasses(currentStudent);
 
-        System.out.println("Suas classes:");
+        System.out.println("Suas turmas:");
 
         if (!classes.isEmpty()) {
             for (int i = 0; i < classes.size(); i++) {
@@ -70,12 +70,13 @@ public class StudentActions {
 
                 String enrollmentString = "";
                 if (showEnrollment) {
-                    enrollmentString = " - " + currentClass.getEnrollmentStatus(currentStudent).toString();
+
+                    enrollmentString = " - " + EnrollmentStatus.getTranslatedStatusNameFromIndex(EnrollmentStatus.valueOf(String.valueOf(currentClass.getEnrollmentStatus(currentStudent).toString())));
                 }
                 System.out.println(index + ". " + currentClass.getName() + enrollmentString);
             }
         } else {
-            System.out.println("Você ainda não está matriculado em nenhuma classe.");
+            System.out.println("Você ainda não está matriculado em nenhuma turma.");
         }
         return classes;
     }
@@ -84,10 +85,12 @@ public class StudentActions {
         ArrayList<Class> availableClasses = ClassesData.getClassesWithoutStudent(currentStudent);
 
         if (availableClasses.isEmpty()) {
+            System.out.println("Que pena não existe nenhuma turma disponível para matrícula no momento!");
+            System.out.println("Fique de olho em nossas redes sociais ou contate nosso suporte no email: universidadealtf4@sesi.com.br");
             return;
         }
 
-        System.out.println("Classes disponíveis:");
+        System.out.println("Turmas disponíveis:");
         for (int i = 0; i < availableClasses.size(); i++) {
             Class currentClass = availableClasses.get(i);
             int index = i + 1;
@@ -95,7 +98,7 @@ public class StudentActions {
         }
 
         System.out.println();
-        System.out.println("Selecione a classe que deseja ingressar:");
+        System.out.println("Selecione a turma que deseja ingressar:");
         System.out.println("(em branco para cancelar)");
 
         String choiceString = Scan.nextLine();
@@ -119,7 +122,7 @@ public class StudentActions {
         }
 
         System.out.println();
-        System.out.println("Escolha uma classe para remover:");
+        System.out.println("Escolha uma turma para remover:");
         System.out.println("(em branco para cancelar)");
 
         String choiceString = Scan.nextLine();
@@ -143,7 +146,7 @@ public class StudentActions {
         }
 
         System.out.println();
-        System.out.println("Escolha uma classe para alterar a matrícula:");
+        System.out.println("Escolha uma turma para alterar a matrícula:");
         System.out.println("(em branco para cancelar)");
 
         String choiceString = Scan.nextLine();
@@ -163,7 +166,7 @@ public class StudentActions {
         EnrollmentStatus currentEnrollmentStatus = currentClass.getEnrollmentStatus(currentStudent);
         System.out.println();
         System.out.println(
-            "Sua matrícula na classe " + currentClass.getName() + " está: " + currentEnrollmentStatus.toString() + "."
+            "Sua matrícula na turma " + currentClass.getName() + " está: " + EnrollmentStatus.getTranslatedStatusNameFromIndex(EnrollmentStatus.valueOf(String.valueOf(currentEnrollmentStatus))) + "."
         );
         String input;
         switch (currentEnrollmentStatus) {
@@ -188,7 +191,7 @@ public class StudentActions {
                     return;
                 }
             case GRADUATED:
-                System.out.println("Você já graduou desta classe.");
+                System.out.println("Você já tem formação concluída nesta turma.");
         }
     }
 
@@ -207,7 +210,7 @@ public class StudentActions {
     ) {
         currentClass.setEnrollmentStatus(currentStudent, enrollmentStatus);
         System.out.println(
-            "Matrícula da classe " + currentClass.getName() + " alterada para: " + enrollmentStatus + "."
+            "Matrícula da turma " + currentClass.getName() + " alterada para: " + EnrollmentStatus.getTranslatedStatusNameFromIndex(EnrollmentStatus.valueOf(String.valueOf(enrollmentStatus))) + "."
         );
     }
 }

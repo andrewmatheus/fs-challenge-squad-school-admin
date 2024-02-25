@@ -1,10 +1,23 @@
-package models;
+package Testing;
 
 import enums.EmployeeLevel;
 import enums.EnrollmentStatus;
+
 import java.util.Scanner;
 
-public class TestsEnum {
+public class EnumsActionsTests {
+
+    /**
+     * Class EnumsActionsTests
+     * test features and assist development.
+     * Decided as a team for internal development only, left for study purposes
+     * */
+
+    public static void main(String[] args) {
+        enumTestLevel();
+        enumTestEnrollment();
+    }
+
     public static void enumTestLevel() {
 
         Scanner scanner = new Scanner(System.in);
