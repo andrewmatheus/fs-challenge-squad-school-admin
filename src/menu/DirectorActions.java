@@ -42,7 +42,7 @@ public class DirectorActions {
                 System.out.println("| (9)  - Relatório geral              |");
                 System.out.println("|                                     |");
                 System.out.println("+-------------------------------------+");
-                System.out.println("| (0) - Sair                          |");
+                System.out.println("| (0) - Voltar para o Login           |");
                 System.out.println("+-------------------------------------+");
                 System.out.print("Selecione uma opção: ");
 

@@ -27,7 +27,7 @@ public class TeacherActions {
                 System.out.println("| (4) - Remover Aluno da turma    |");
                 System.out.println("|                                 |");
                 System.out.println("+---------------------------------+");
-                System.out.println("| (0) - Sair                      |");
+                System.out.println("| (0) - Voltar para o Login       |");
                 System.out.println("+---------------------------------+");
                 System.out.print  ("Selecione uma opção: "     );
 
