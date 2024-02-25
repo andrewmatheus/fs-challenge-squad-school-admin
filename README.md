@@ -2,8 +2,8 @@
   UniversityAltF4: Teaching unit management
 </h1>  
 
-<p align="center">  
-  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/andrewmatheus/fs-challenge-squad-school-admin.svg">
+<p align="center">    
+  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/andrewmatheus/fs-challenge-squad-school-admin.svg">  
 
   <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/andrewmatheus/fs-challenge-squad-school-admin.svg">
 
@@ -46,18 +46,17 @@ $ git clone https://github.com/andrewmatheus/fs-challenge-squad-school-admin.git
 
 > In Intellij, you can configure the project structure by importing the .iml file step by step below:
 
-
 |PT-BR|
 | **Passo** | **Descrição** |
 |-----------|---------------|
 | **1.**    | **Importar Projeto no IntelliJ IDEA:** |
 |           |   - Abra o IntelliJ IDEA. |
 |           |   - Vá para `File` > `New` > `Project from Existing Sources`. |
-|           |   - Navegue até o diretório onde você clonou o repositório e selecione o arquivo `.iml` correspondente ao seu projeto. |
-|           |   - Siga as instruções para importar o projeto. |
+|           |   - Navegue até o diretório onde você clonou o repositório e selecione o seu projeto. |
 | **2.**    | **Configurar Módulos e Dependências:** |
 |           |   - Certifique-se de que as configurações do módulo estão corretas. |
 |           |   - Vá para `File` > `Project Structure` e verifique as configurações do módulo, como o SDK Java e as dependências. |
+|           |   - Nos módulos, remova e adicione novamente o arquivo .iml existente no projeto. "fs-challenge-squad-school-admin.iml" |
 | **3.**    | **Reconstruir o Projeto:** |
 |           |   - Após a importação, você pode precisar reconstruir o projeto. |
 |           |   - Vá para `Build` > `Rebuild Project` no IntelliJ IDEA. |
@@ -68,11 +67,11 @@ $ git clone https://github.com/andrewmatheus/fs-challenge-squad-school-admin.git
 | **1.**   | **Import Project in IntelliJ IDEA:** |
 |          |   - Open IntelliJ IDEA. |
 |          |   - Go to `File` > `New` > `Project from Existing Sources`. |
-|          |   - Navigate to the directory where you cloned the repository and select the corresponding `.iml` file for your project. |
-|          |   - Follow the instructions to import the project. |
+|          |   - Navigate to the directory where you cloned the repository and select your project. |
 | **2.**   | **Configure Modules and Dependencies:** |
 |          |   - Ensure that module settings are correct. |
 |          |   - Go to `File` > `Project Structure` and check module settings such as Java SDK and dependencies. |
+|          |   - In modules, remove and re-add the .iml file existing in the project. "fs-challenge-squad-school-admin.iml" |
 | **3.**   | **Rebuild the Project:** |
 |          |   - After importing, you may need to rebuild the project. |
 |          |   - Go to `Build` > `Rebuild Project` in IntelliJ IDEA. |
