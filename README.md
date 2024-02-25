@@ -3,10 +3,6 @@
 </h1>  
 
 <p align="center">    
-  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/andrewmatheus/fs-challenge-squad-school-admin.svg">  
-
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/andrewmatheus/fs-challenge-squad-school-admin.svg">
-
   <img alt="Repository size" src="https://img.shields.io/github/repo-size/andrewmatheus/fs-challenge-squad-school-admin.svg">
   <a href="https://github.com/andrewmatheus/fs-challenge-squad-school-admin/commits/master">
     <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/andrewmatheus/fs-challenge-squad-school-admin.svg">
