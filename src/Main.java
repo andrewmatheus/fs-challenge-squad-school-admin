@@ -188,17 +188,17 @@ public class Main {
             int optionSelected;
 
             do {
-                System.out.println("+---------------------------------+");
-                System.out.println("+       PAINEL DO FUNCIONÁRIO     +");
-                System.out.println("+         ---- LOGIN ----         +");
-                System.out.println("+---------------------------------+");
-                System.out.println("|                                 |");
-                System.out.println("| (1) - Acessar meu painel        |");
-                System.out.println("| (2) - Criar novo funcionário(a) |");
-                System.out.println("|                                 |");
-                System.out.println("+---------------------------------+");
-                System.out.println("| (0) - Sair                      |");
-                System.out.println("+---------------------------------+");
+                System.out.println("+------------------------------------+");
+                System.out.println("+         PAINEL DO FUNCIONÁRIO      +");
+                System.out.println("+           ---- LOGIN ----          +");
+                System.out.println("+------------------------------------+");
+                System.out.println("|                                    |");
+                System.out.println("| (1) - Acessar meu painel           |");
+                System.out.println("| (2) - Criar novo funcionário(a)    |");
+                System.out.println("|                                    |");
+                System.out.println("+---------------------------------- -+");
+                System.out.println("| (0) -  Sair do painel do professor |");
+                System.out.println("+------------------------------------+");
                 System.out.print  ("Selecione uma opção: "     );
 
                 optionSelected = Scan.nextInt();
@@ -275,7 +275,7 @@ public class Main {
             System.out.println("| (2) - Novo(a) Diretor(a)        |");
             System.out.println("|                                 |");
             System.out.println("+---------------------------------+");
-            System.out.println("| (0) - Sair                      |");
+            System.out.println("| (0) - Voltar                    |");
             System.out.println("+---------------------------------+");
 
             System.out.print  ("Selecione uma opção: "     );
