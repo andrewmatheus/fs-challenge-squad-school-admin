@@ -22,7 +22,7 @@
   <a href="#notebook-About-this-Project">About this Project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#rocket-Getting-Started">Getting Started</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#hammer-Built-With">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;  
-  <a href="#mailbox-Contacts">Team</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;    
+  <a href="#mailbox-Team">Team</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;    
 </p>   
    
    
