@@ -30,7 +30,7 @@ public class Class {
     public String toString() {
         return "Turma: " +
                 "Nome: " + name +
-                "Ano: " + year +
+                ", Ano: " + year +
                 ", Curso: " + course.getName() +
                 ", Alunos: " + students.size();
     }
