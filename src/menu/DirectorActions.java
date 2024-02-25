@@ -110,32 +110,47 @@ public class DirectorActions {
 
         // Exibir todos os professores
         System.out.println("\n------- Professores -------");
-        for (Teacher teacher : teachers) {
-            int index = teachers.indexOf(teacher) + 1;
-            System.out.println(index + ". " + teacher.toString());
+        if (teachers.isEmpty()) {
+            System.out.println("Nenhum(a) professor(a) cadastrado(a) ainda!");
+        } else {
+            for (Teacher teacher : teachers) {
+                int index = teachers.indexOf(teacher) + 1;
+                System.out.println(index + ". " + teacher.toString());
+            }
         }
 
         // Exibir todos os alunos
         System.out.println("\n------- Alunos -------");
-        for (Student student : students) {
-            int index = students.indexOf(student);
-            System.out.println(index + ". " + student.toString());
+        if (students.isEmpty()) {
+            System.out.println("Nenhum aluno cadastrado ainda!");
+        } else {
+            for (Student student : students) {
+                int index = students.indexOf(student);
+                System.out.println(index + ". " + student.toString());
+            }
         }
 
         // Exibir todos os cursos e turmas com seus respectivos professores
-        System.out.println("\n------- Turmas e Cursos Asociados -------");
-        for (Class class_ : classes) {
-            Course course = class_.getCourse();
-            String teacherName = course.getTeacher().getName();
-            System.out.println("Turma: " + class_.getName() + ", Ano: " + class_.getYear() + ", Curso: " + course.getName() + ", Profesor: " + teacherName);
+        System.out.println("\n------- Turmas e Cursos Associados -------");
+        if (classes.isEmpty()) {
+            System.out.println("Nenhuma turma ou curso cadastrado ainda!");
+        } else {
+            for (Class class_ : classes) {
+                Course course = class_.getCourse();
+                String teacherName = course.getTeacher().getName();
+                System.out.println("Turma: " + class_.getName() + ", Ano: " + class_.getYear() + ", Curso: " + course.getName() + ", Profesor: " + teacherName);
+            }
         }
 
         // Manter o menu ativo
         System.out.println("\nPressione qualquer tecla para voltar ao menu.");
-        Scan.nextLine();
+        try {
+            Scan.nextLine();
+        } catch (Exception e) {
+            System.out.println("Voltando ao menu!");
+        }
+
     }
-
-
 
     /*
      * Method to promote a teacher to the next job level
@@ -343,13 +358,15 @@ public class DirectorActions {
 
             // Verificar se o índice do aluno é válido
             if (StudentId > 0 && StudentId <= students.size()) {
-                students.remove(StudentId - 1); // Remover o aluno da lista
+                StudentsData.removeStudent(StudentId); // Remover o aluno da lista
                 System.out.println("\nAluno removido com sucesso!");
             } else {
                 System.out.println("\nID do aluno inválido. Verifique e tente novamente.");
             }
         } catch (Exception exception) {
             System.out.println("\nNão foi possível remover o aluno! Tente novamente.");
+        } finally {
+            System.out.println("Voltando ao menu diretor!");
         }
     }
 
@@ -429,7 +446,7 @@ public class DirectorActions {
                     Class newClass = new Class(className, year, selectedCourse);
                     ClassesData.addClass(newClass);
 
-                    System.out.println("\nNova turma -" + className + "- associada ao curso -" + selectedCourse.getName() + "- criada com sucesso!");
+                    System.out.println("\nNova turma: " + className + " associada ao curso: " + selectedCourse.getName() + ", criada com sucesso!");
                 } else {
                     System.out.println("\nOpção inválida. A turma não foi criada.");
                 }

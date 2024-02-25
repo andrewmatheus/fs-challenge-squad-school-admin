@@ -1,7 +1,6 @@
 import classes.Director;
 import classes.Student;
 import classes.Teacher;
-import data.ClassesData;
 import data.DirectorsData;
 import data.StudentsData;
 import data.TeachersData;
@@ -67,17 +66,17 @@ public class Main {
             int optionSelected;
 
             do {
-                System.out.println("+------------------------------+");
-                System.out.println("+       PAINEL DO ALUNO        +");
-                System.out.println("+       ---- LOGIN ----        +");
-                System.out.println("+------------------------------+");
-                System.out.println("|                              |");
-                System.out.println("| (1) - Acessar meu painel     |");
-                System.out.println("| (2) - Criar novo aluno(a)    |");
-                System.out.println("|                              |");
-                System.out.println("+------------------------------+");
-                System.out.println("| (0) - Sair                   |");
-                System.out.println("+------------------------------+");
+                System.out.println("+-------------------------------+");
+                System.out.println("+        PAINEL DO ALUNO        +");
+                System.out.println("+        ---- LOGIN ----        +");
+                System.out.println("+-------------------------------+");
+                System.out.println("|                               |");
+                System.out.println("| (1) - Acessar meu painel      |");
+                System.out.println("| (2) - Criar novo aluno(a)     |");
+                System.out.println("|                               |");
+                System.out.println("+-------------------------------+");
+                System.out.println("| (0) - Sair do painel do aluno |");
+                System.out.println("+-------------------------------+");
                 System.out.print  ("Selecione uma opção: "     );
 
                 optionSelected = Scan.nextInt();

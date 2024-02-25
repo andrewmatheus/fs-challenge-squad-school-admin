@@ -1,12 +1,8 @@
 package Testing;
 
-import classes.Class;
-import classes.Course;
 import classes.Director;
 import classes.Student;
 import classes.Teacher;
-import data.ClassesData;
-import data.CoursesData;
 import data.DirectorsData;
 import data.StudentsData;
 import data.TeachersData;
@@ -14,9 +10,14 @@ import enums.EmployeeLevel;
 import menu.DirectorActions;
 import utils.Scan;
 
-import java.util.Scanner;
-
 public class DirectorActionsTests {
+
+    /**
+     * Class DirectorActionsTests
+     * test features and assist development.
+     * Decided as a team for internal development only, left for study purposes
+     * */
+
     public static void main(String[] args) {
 // Cadastrando professores
         Teacher andre = new Teacher("André", 28, 10500.0, 11);
