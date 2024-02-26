@@ -1,6 +1,7 @@
 package data;
 
 import classes.Class;
+import classes.Course;
 import classes.Student;
 
 import java.util.ArrayList;
@@ -32,6 +33,10 @@ public class ClassesData {
             System.out.println("Error: " + e.getMessage());
             System.out.println("Turma não pode ser encontrada, verifique se o índice foi informado corretamente.");
         }
+    }
+
+    public static void removeClass(Class aClass) {
+        removeClass(classesList.indexOf(aClass));
     }
 
     /**
@@ -84,5 +89,16 @@ public class ClassesData {
         return new ArrayList<>(classesList);
     }
 
+    public static ArrayList<Class> getClassessAssociatedWithCourse(Course course) {
+        ArrayList<Class> classes = new ArrayList<>();
+
+        for (Class currentClass : classesList) {
+            if (currentClass.getCourse().equals(course)) {
+                classes.add(currentClass);
+            }
+        }
+
+        return classes;
+    }
     // </editor-fold>
 }
