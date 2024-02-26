@@ -34,9 +34,8 @@ public class Scan {
      * */
     public static int nextInt() {
         initializeScanner();
-        int input = scanner.nextInt();
-        scanner.nextLine();
-        return input;
+        String input = scanner.nextLine().strip();
+        return Integer.parseInt(input);
     }
 
     /**
@@ -44,9 +43,8 @@ public class Scan {
      * */
     public static double nextDouble() {
         initializeScanner();
-        double number = scanner.nextDouble();
-        scanner.nextLine();
-        return number;
+        String input = scanner.nextLine().strip();
+        return Double.parseDouble(input);
     }
 
     /**

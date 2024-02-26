@@ -1,13 +1,16 @@
 package data;
 
+import classes.Class;
 import classes.Course;
+import classes.Teacher;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CoursesData {
     // <editor-fold desc="Attributes">
-    private static final List<Course> coursesList = new ArrayList<>();
+    private static final ArrayList<Course> coursesList = new ArrayList<>();
     // </editor-fold>
 
     // <editor-fold desc="Methods">
@@ -24,13 +27,21 @@ public class CoursesData {
      * no usage created start project - (case study)
      * */
     public static void removeCourse(int id) {
-        try {
-            Course removedCourse = coursesList.remove(id);
-            System.out.println("Curso: " + removedCourse.getName() + " removido com sucesso.");
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Error: " + e.getMessage());
-            System.out.println("Curso não pode ser encontrado, verifique se o índice foi informado corretamente.");
+        if (id >= 0 && id < coursesList.size()) {
+            Course course = coursesList.get(id);
+            ArrayList<Class> classes = ClassesData.getClassessAssociatedWithCourse(course);
+            for (Class currentClass : classes) {
+                ClassesData.removeClass(currentClass);
+            }
+            coursesList.remove(course);
+            System.out.println("Curso: " + course.getName() + " removido com sucesso.");
+        } else {
+            throw new IndexOutOfBoundsException("ID do curso inválido.");
         }
+    }
+
+    public static void removeCourse(Course course) {
+        removeCourse(coursesList.indexOf(course));
     }
 
     /**
@@ -48,8 +59,20 @@ public class CoursesData {
     /**
      * Method getCoursesList - return list of all courses
      * */
-    public static List<Course> getCoursesList() {
-        return coursesList;
+    public static ArrayList<Course> getAllCourses() {
+        return new ArrayList<>(coursesList);
+    }
+
+    public static ArrayList<Course> getCoursesWithTeacher(Teacher teacher) {
+        ArrayList<Course> courses = new ArrayList<>();
+
+        for (Course course : coursesList) {
+            if (course.getTeacher().equals(teacher)) {
+                courses.add(course);
+            }
+        }
+
+        return courses;
     }
     // </editor-fold>
 }

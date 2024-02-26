@@ -1,8 +1,5 @@
 package classes;
 
-import static utils.Validations.validateMail;
-import static utils.Validations.validatePhoneNumber;
-
 public class Student {
     // <editor-fold desc="Attributes">
     private int id;
@@ -27,17 +24,14 @@ public class Student {
      * */
     public Student(String name, String mail, String phoneNumber){
         this.name = name;
-        try{
-            validateMail(mail);
-            validatePhoneNumber(phoneNumber);
+        this.mail = mail;
+        this.phoneNumber = phoneNumber;
+    }
 
-            this.mail = mail;
-            this.phoneNumber = phoneNumber;
-        }catch (IllegalArgumentException e){
-            System.out.println("Erro: "+e.getMessage());
-        }finally {
-            System.out.println("Fluxo de validação finalizado!");
-        }
+    public Student(String name, String mail) {
+        this.name = name;
+        this.mail = mail;
+        this.phoneNumber = "";
     }
 
     /**

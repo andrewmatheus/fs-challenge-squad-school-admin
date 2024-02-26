@@ -1,11 +1,11 @@
 package Testing;
 
+import classes.Class;
+import classes.Course;
 import classes.Director;
 import classes.Student;
 import classes.Teacher;
-import data.DirectorsData;
-import data.StudentsData;
-import data.TeachersData;
+import data.*;
 import enums.EmployeeLevel;
 import menu.DirectorActions;
 import utils.Scan;
@@ -38,6 +38,21 @@ public class DirectorActionsTests {
 // Cadastrando diretor
         Director director = new Director("Bruno", 15400, 20);
         DirectorsData.addDirector(director);
+
+
+        Course course1 = new Course("Course 1", andre);
+        Course course2 = new Course("Course 2", cesar);
+        CoursesData.addCourse(course1);
+        CoursesData.addCourse(course2);
+
+        Class class1 = new classes.Class("Classe 1", 2024, course1);
+        Class class2 = new Class("Classe 2", 2024, course2);
+        ClassesData.addClass(class1);
+        ClassesData.addClass(class2);
+
+        class1.addStudent(gabriel);
+        class2.addStudent(regina);
+
 
         // Passando o diretor para o menu de ações do diretor
         DirectorActions.menu(director);

@@ -10,6 +10,8 @@ import menu.TeacherActions;
 import utils.Scan;
 
 import static utils.Validations.validateEmail;
+import static utils.Validations.validatePhoneNumber;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -86,13 +88,14 @@ public class Main {
                         loginStudent();
                         break;
                     case 2:
-                        addNewStudent(null);
+                        addNewStudent();
                         break;
                     case 0:
                         System.out.println("Saindo do painel do aluno ...");
                         break;
                     default:
                         System.out.println("Opção selecionada não é válida. Voltando ao menu principal...");
+                        break;
                 }
             } while (optionSelected != 0);
         } catch (Exception exception) {
@@ -104,39 +107,30 @@ public class Main {
      * Student login method
      * */
     public static void loginStudent() {
-        try {
-            String mail;
+        System.out.println("Digite seu e-mail de acesso: ");
+        String mail = Scan.nextLine().strip().toLowerCase();
 
-            do {
-                System.out.println("Digite seu e-mail de acesso: ");
-                mail = Scan.next().trim().toLowerCase();
-
-                if (!mail.trim().isEmpty()) {
-                    if (validateEmail(mail)) {
-
-                        Student student = StudentsData.findStudentByMail(mail);
-                        
-                        if (student == null) {
-                            System.out.println("Aluno(a) não encontrado!");
-                            student = addNewStudent(mail);
-                        }
-
-                        menuStudentLogged(student);
-
-                        // caso exista turma aberta perguntar se já deseja se vincular a uma turma existente e realizar matricula
-                        // Aqui tem q ter a funcionalidade de matricular numa turma (Cartão novo)
-
-                    } else {
-                        System.out.println("Você não informou um email válido. Tente novamente!");
-                    }
-                } else {
-                    System.out.println("Você não informou um email válido.");
-                }
-            } while (!validateEmail(mail));
-
-        } catch (Exception exception) {
-            System.out.println("Falha em identificar um aluno ou e-mail informado não é válido!");
+        if (mail.isEmpty()) {
+            return;
         }
+
+        if (!validateEmail(mail)) {
+            System.out.println("Você não informou um email válido.");
+            return;
+        }
+
+        Student student = StudentsData.findStudentByMail(mail);
+
+        if (student == null) {
+            System.out.println("Aluno(a) não encontrado!");
+            student = addNewStudent(mail);
+
+            if (student == null) {
+                return;
+            }
+        }
+
+        menuStudentLogged(student);
     }
 
     /*
@@ -146,6 +140,9 @@ public class Main {
         StudentActions.menu(student);
     }
 
+    public static Student addNewStudent() {
+        return addNewStudent(null);
+    }
     /*
      * Method for adding a new student
      * */
@@ -154,23 +151,51 @@ public class Main {
         System.out.println("+         NOVO ALUNO(A)           +");
         System.out.println("+---------------------------------+");
         if (mail == null || mail.isEmpty()) {
-            System.out.println("Digite seu e-mail de acesso: ");
-            mail = Scan.next().trim().toLowerCase();
+            while (true) {
+                System.out.println("Digite seu e-mail de acesso: ");
+                mail = Scan.next().trim().toLowerCase();
 
-            if (!validateEmail(mail) && !mail.trim().isEmpty()) {
-                do  {
+                if (mail.isEmpty()) {
+                    System.out.println("Cadastro de novo aluno cancelado.");
+                    return null;
+                }
+
+                if (!validateEmail(mail)) {
                     System.out.println("E-mail inválido! tente novamente.");
-                    System.out.println("Digite seu e-mail de acesso: ");
-                    mail = Scan.next().toLowerCase();
-                } while ((!validateEmail(mail)));
+                    continue;
+                }
+
+                if (!StudentsData.isEmailAdressAvailable(mail)) {
+                    System.out.println("E-mail já está cadastrado. Utilize um e-mail diferente.");
+                    continue;
+                }
+
+                break;
             }
         }
 
         System.out.println("Digite seu nome: ");
         String nameStudent = Scan.next().toLowerCase();
+
+        if (nameStudent.isEmpty()) {
+            System.out.println("Não é permitido criar um aluno com nome vazio.");
+            System.out.println("Operação cancelada.");
+            return null;
+        }
+
         System.out.println("Digite seu telefone: ");
         System.out.println("Exemplo: 48999999999 ");
         String phoneNumber = Scan.next().toLowerCase();
+
+        if (!phoneNumber.isEmpty()) {
+            try {
+                validatePhoneNumber(phoneNumber);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Número de telefone inválido.");
+                System.out.println("Operação cancelada.");
+                return null;
+            }
+        }
 
         Student newStudent = new Student(nameStudent, mail, phoneNumber);
         StudentsData.addStudent(newStudent);
