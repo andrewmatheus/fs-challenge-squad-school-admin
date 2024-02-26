@@ -31,6 +31,10 @@ public class StudentsData {
         return null;
     }
 
+    public static boolean isEmailAdressAvailable(String mail) {
+        return findStudentByMail(mail) == null;
+    }
+
     /**
      * Method addStudent - responsible for adding a student to the list.
      * */
@@ -44,8 +48,16 @@ public class StudentsData {
      * */
     public static void removeStudent(int id) {
         if (id >= 0 && id < studentsList.size()) {
-            Student removedStudent = studentsList.remove(id);
-            System.out.println("Aluno(a): " + removedStudent.getName() + " removido(a) com sucesso.");
+            Student student = studentsList.get(id);
+
+            ArrayList<Class> classes = ClassesData.getStudentClasses(student);
+            for (Class currentClass : classes) {
+                currentClass.removeStudent(student);
+            }
+
+            studentsList.remove(id);
+
+            System.out.println("Aluno(a): " + student.getName() + " removido(a) com sucesso.");
         } else {
             System.out.println("Aluno(a) não pode ser encontrado(a), verifique se o índice foi informado corretamente.");
         }

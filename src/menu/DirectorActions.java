@@ -11,12 +11,12 @@ import data.StudentsData;
 import data.TeachersData;
 import enums.EmployeeLevel;
 import utils.Scan;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import utils.Validations;
 
-import static data.TeachersData.removeTeacherById;
+import static utils.Validations.validateEmail;
 
 
 public class DirectorActions {
@@ -26,20 +26,15 @@ public class DirectorActions {
             int optionSelected;
 
             do {
-
                 System.out.println("\nFUNCIONÁRIO: " + director.getName());
                 System.out.println("CARGO: DIRETOR");
                 System.out.println("+-------------------------------------+");
                 System.out.println("|                                     |");
-                System.out.println("| (1)  - Promover professor           |");
-                System.out.println("| (2)  - Adicionar/Remover professor  |");
-                System.out.println("| (3)  - Adicionar/Remover aluno      |");
-                System.out.println("| (4)  - Criar um Curso               |");
-                System.out.println("| (5)  - Criar uma turma              |");
-                System.out.println("| (6)  - Listar Alunos na turma       |");
-                System.out.println("| (7)  - Adicionar Aluno na turma     |");
-                System.out.println("| (8)  - Remover Aluno da turma       |");
-                System.out.println("| (9)  - Relatório geral              |");
+                System.out.println("| (1)  - Gerenciar cursos             |");
+                System.out.println("| (2)  - Gerenciar turmas             |");
+                System.out.println("| (3)  - Gerenciar professores        |");
+                System.out.println("| (4)  - Gerenciar alunos             |");
+                System.out.println("| (5)  - Relatório geral              |");
                 System.out.println("|                                     |");
                 System.out.println("+-------------------------------------+");
                 System.out.println("| (0) - Voltar para o Login           |");
@@ -50,43 +45,218 @@ public class DirectorActions {
 
                 switch (optionSelected) {
                     case 1:
-                        // Promover o cargo de um professor, default BEGINNER.
-                        promoteTeacher();
+                        manageCoursesSubmenu(director);
                         break;
                     case 2:
-                        // Adicionar ou remover professor
-                        addRemoveTeacher();
+                        manageClassesSubmenu(director);
                         break;
                     case 3:
-                        // Adicionar ou remover aluno
-                        addRemoveStudent();
+                        manageTeachersSubmenu(director);
                         break;
                     case 4:
-                        //Criar um curso
-                        createNewCourse();
+                        manageStudentsSubmenu(director);
                         break;
                     case 5:
-                        //Criar uma turma
-                        createNewClass();
-                        break;
-                    case 6:
-                        // Listar ALunos na turma
-                        TeacherActions.listStudentsInClassMenu();
-                        break;
-                    case 7:
-                        // Adicionar Aluno na turma
-                        TeacherActions.addStudentToClassMenu();
-                        break;
-                    case 8:
-                        // Remover ALuno da Turma
-                        TeacherActions.removeStudentFromClassMenu();
-                        break;
-                    case 9:
-                        // Listar todos os professores e alunos com seus IDs
                         relatorioGeral();
                         break;
                     case 0:
                         System.out.println("Deslogado com sucesso!");
+                        break;
+                    default:
+                        System.out.println("Opção selecionada não é válida. Voltando ao menu principal...");
+                }
+            } while (optionSelected != 0);
+
+        } catch (Exception exception) {
+            System.out.println("Opção informada não é válida. Informe um número de acordo com menu.");
+        }
+    }
+
+    private static void manageCoursesSubmenu(Director director) {
+        try {
+            int optionSelected;
+
+            do {
+                System.out.println("\nFUNCIONÁRIO: " + director.getName());
+                System.out.println("CARGO: DIRETOR");
+                System.out.println("+-------------------------------------+");
+                System.out.println("|        Gerenciar cursos             |");
+                System.out.println("+-------------------------------------+");
+                System.out.println("|                                     |");
+                System.out.println("| (1)  - Listar cursos                |");
+                System.out.println("| (2)  - Adicionar curso              |");
+                System.out.println("| (3)  - Remover curso                |");
+                System.out.println("|                                     |");
+                System.out.println("+-------------------------------------+");
+                System.out.println("| (0) - Voltar para o menu anterior   |");
+                System.out.println("+-------------------------------------+");
+                System.out.print("Selecione uma opção: ");
+
+                optionSelected = Scan.nextInt();
+
+                switch (optionSelected) {
+                    case 1:
+                        listCourses(CoursesData.getAllCourses());
+                        break;
+                    case 2:
+                        createNewCourse();
+                        break;
+                    case 3:
+                        removeCourse();
+                        break;
+                    case 0:
+                        break;
+                    default:
+                        System.out.println("Opção selecionada não é válida. Voltando ao menu principal...");
+                }
+            } while (optionSelected != 0);
+
+        } catch (Exception exception) {
+            System.out.println("Opção informada não é válida. Informe um número de acordo com menu.");
+        }
+    }
+
+    private static void manageClassesSubmenu(Director director) {
+        try {
+            int optionSelected;
+
+            do {
+                System.out.println("\nFUNCIONÁRIO: " + director.getName());
+                System.out.println("CARGO: DIRETOR");
+                System.out.println("+-------------------------------------+");
+                System.out.println("|        Gerenciar turmas             |");
+                System.out.println("+-------------------------------------+");
+                System.out.println("|                                     |");
+                System.out.println("| (1)  - Listar turmas                |");
+                System.out.println("| (2)  - Adicionar turma              |");
+                System.out.println("| (3)  - Remover turma                |");
+                System.out.println("|                                     |");
+                System.out.println("+-------------------------------------+");
+                System.out.println("|                                     |");
+                System.out.println("| (4)  - Listar alunos na turma       |");
+                System.out.println("| (5)  - Adicionar aluno na turma     |");
+                System.out.println("| (6)  - Remover aluno da turma       |");
+                System.out.println("|                                     |");
+                System.out.println("+-------------------------------------+");
+                System.out.println("| (0) - Voltar para o menu anterior   |");
+                System.out.println("+-------------------------------------+");
+                System.out.print("Selecione uma opção: ");
+
+                optionSelected = Scan.nextInt();
+
+                switch (optionSelected) {
+                    case 1:
+                        listClasses(ClassesData.getAllClasses());
+                        break;
+                    case 2:
+                        createNewClass();
+                        break;
+                    case 3:
+                        removeClass();
+                        break;
+                    case 4:
+                        TeacherActions.listStudentsInClassMenu();
+                        break;
+                    case 5:
+                        TeacherActions.addStudentToClassMenu();
+                        break;
+                    case 6:
+                        TeacherActions.removeStudentFromClassMenu();
+                        break;
+                    case 0:
+                        break;
+                    default:
+                        System.out.println("Opção selecionada não é válida. Voltando ao menu principal...");
+                }
+            } while (optionSelected != 0);
+
+        } catch (Exception exception) {
+            System.out.println("Opção informada não é válida. Informe um número de acordo com menu.");
+        }
+    }
+
+    private static void manageTeachersSubmenu(Director director) {
+
+        try {
+            int optionSelected;
+
+            do {
+                System.out.println("\nFUNCIONÁRIO: " + director.getName());
+                System.out.println("CARGO: DIRETOR");
+                System.out.println("+-------------------------------------+");
+                System.out.println("|        Gerenciar professores        |");
+                System.out.println("+-------------------------------------+");
+                System.out.println("|                                     |");
+                System.out.println("| (1)  - Listar professores           |");
+                System.out.println("| (2)  - Promover professor           |");
+                System.out.println("| (3)  - Adicionar professor          |");
+                System.out.println("| (4)  - Remover professor            |");
+                System.out.println("|                                     |");
+                System.out.println("+-------------------------------------+");
+                System.out.println("| (0) - Voltar para o menu anterior   |");
+                System.out.println("+-------------------------------------+");
+                System.out.print("Selecione uma opção: ");
+
+                optionSelected = Scan.nextInt();
+
+                switch (optionSelected) {
+                    case 1:
+                        listTeachers(TeachersData.getAllTeachers());
+                        break;
+                    case 2:
+                        promoteTeacher();
+                        break;
+                    case 3:
+                        addNewTeacher();
+                        break;
+                    case 4:
+                        removeTeacher();
+                        break;
+                    case 0:
+                        break;
+                    default:
+                        System.out.println("Opção selecionada não é válida. Voltando ao menu principal...");
+                }
+            } while (optionSelected != 0);
+
+        } catch (Exception exception) {
+            System.out.println("Opção informada não é válida. Informe um número de acordo com menu.");
+        }
+    }
+
+    private static void manageStudentsSubmenu(Director director) {
+        try {
+            int optionSelected;
+
+            do {
+                System.out.println("\nFUNCIONÁRIO: " + director.getName());
+                System.out.println("CARGO: DIRETOR");
+                System.out.println("+-------------------------------------+");
+                System.out.println("|        Gerenciar alunos             |");
+                System.out.println("+-------------------------------------+");
+                System.out.println("|                                     |");
+                System.out.println("| (1)  - Listar alunos                |");
+                System.out.println("| (2)  - Adicionar aluno              |");
+                System.out.println("| (3)  - Remover aluno                |");
+                System.out.println("|                                     |");
+                System.out.println("+-------------------------------------+");
+                System.out.println("| (0) - Voltar para o menu anterior   |");
+                System.out.println("+-------------------------------------+");
+                System.out.print("Selecione uma opção: ");
+
+                optionSelected = Scan.nextInt();
+
+                switch (optionSelected) {
+                    case 1:
+                        listStudents(StudentsData.getAllStudents());
+                        break;
+                    case 2:
+                        addNewStudent();
+                        break;
+                    case 3:
+                        removeStudent();
+                        break;
+                    case 0:
                         break;
                     default:
                         System.out.println("Opção selecionada não é válida. Voltando ao menu principal...");
@@ -105,8 +275,7 @@ public class DirectorActions {
         // Obter listas de professores, alunos e cursos
         List<Teacher> teachers = TeachersData.getAllTeachers();
         List<Student> students = StudentsData.getAllStudents();
-        //List<Course> courses = CoursesData.getCoursesList();
-        List<Class> classes = ClassesData.getAllClasses();
+        List<Course> courses = CoursesData.getAllCourses();
 
         // Exibir todos os professores
         System.out.println("\n------- Professores -------");
@@ -131,25 +300,12 @@ public class DirectorActions {
         }
 
         // Exibir todos os cursos e turmas com seus respectivos professores
-        System.out.println("\n------- Turmas e Cursos Associados -------");
-        if (classes.isEmpty()) {
+        System.out.println("\n------- Cursos e Turmas Associados -------");
+        if (courses.isEmpty()) {
             System.out.println("Nenhuma turma ou curso cadastrado ainda!");
         } else {
-            for (Class class_ : classes) {
-                Course course = class_.getCourse();
-                String teacherName = course.getTeacher().getName();
-                System.out.println("Turma: " + class_.getName() + ", Ano: " + class_.getYear() + ", Curso: " + course.getName() + ", Profesor: " + teacherName);
-            }
+            listCourses(courses);
         }
-
-        // Manter o menu ativo
-        System.out.println("\nPressione qualquer tecla para voltar ao menu.");
-        try {
-            Scan.nextLine();
-        } catch (Exception e) {
-            System.out.println("Voltando ao menu!");
-        }
-
     }
 
     /*
@@ -166,7 +322,14 @@ public class DirectorActions {
 
             // Solicitar ao diretor que escolha o índice do professor a ser promovido
             System.out.print("Digite o índice do professor que deseja promover (0 para sair): ");
-            int index = Scan.nextInt();
+            String indexString = Scan.nextLine().strip();
+
+            if (indexString.isEmpty()) {
+                System.out.println("Operação cancelada.");
+                return;
+            }
+
+            int index = Integer.parseInt(indexString);
 
             if (index == 0) {
                 System.out.println("Operação cancelada.");
@@ -193,6 +356,11 @@ public class DirectorActions {
 
     private static void listTeachers(List<Teacher> teachers) {
         System.out.println("Lista de Professores:");
+        if (teachers.isEmpty()) {
+            System.out.println("Não há professores cadastrados.");
+            return;
+        }
+
         for (int i = 0; i < teachers.size(); i++) {
             Teacher teacher = teachers.get(i);
             int index = i + 1;
@@ -203,6 +371,70 @@ public class DirectorActions {
         }
     }
 
+    private static void listStudents(List<Student> students) {
+        System.out.println("Lista de estudantes:");
+        if (students.isEmpty()) {
+            System.out.println("Não há estudantes cadastrados.");
+            return;
+        }
+
+        for (int i = 0; i < students.size(); i++) {
+            Student student = students.get(i);
+            int index = i + 1;
+            System.out.println(index + ". " + student.getName());
+        }
+    }
+
+    private static void listCourses(List<Course> courses) {
+        System.out.println("Lista de cursos:");
+        if (courses.isEmpty()) {
+            System.out.println("Não há cursos cadastrados.");
+            return;
+        }
+
+        for (int i = 0; i < courses.size(); i++) {
+            Course course = courses.get(i);
+            int index = i + 1;
+
+            String name = course.getName();
+            String teacher = " - Professor: " + course.getTeacher().getName();
+
+            ArrayList<Class> classes = ClassesData.getClassessAssociatedWithCourse(course);
+            if (classes.isEmpty()) {
+                System.out.println(index + ". " + name + teacher + " (Nenhuma turma associada.)");
+            } else {
+                String indentation = "    ";
+                System.out.println(index + ". " + name + teacher);
+                System.out.println(indentation + "Turmas associadas:");
+                for (Class currentClass : classes) {
+                    String className = currentClass.getName();
+                    String classYear = " - Ano: " + currentClass.getYear();
+                    String studentCount = " - Alunos: " + currentClass.getStudents().size();
+                    System.out.println(indentation + className + classYear + studentCount + ".");
+                }
+            }
+        }
+    }
+
+    private static void listClasses(List<Class> classes) {
+        System.out.println("Lista de turmas:");
+        if (classes.isEmpty()) {
+            System.out.println("Não há turmas cadastradas.");
+            return;
+        }
+
+        for (int i = 0; i < classes.size(); i++) {
+            Class currentClass = classes.get(i);
+            int index = i + 1;
+
+            String name = currentClass.getName();
+            String course = " - Curso: " + currentClass.getCourse().getName();
+            String year = " - Ano: " + currentClass.getYear();
+            String studentCount = " - Alunos:" + currentClass.getStudents().size();
+            System.out.println(index + ". " + name + course + year + studentCount + ".");
+        }
+    }
+
     public static void addNewTeacher() {
         // método duplicado na Main
         try {
@@ -210,12 +442,41 @@ public class DirectorActions {
             System.out.print("Digite o nome: ");
             String name = Scan.next();
 
+            if (name.isEmpty()) {
+                System.out.println("Não é permitido criar um professor com nome vazio.");
+                System.out.println("Operação cancelada.");
+                return;
+            }
+
             System.out.print("Digite a idade: ");
-            int age = Scan.nextInt();
+            String ageInput = Scan.nextLine().strip();
+
+            if (ageInput.isEmpty()) {
+                System.out.println("Operação cancelada.");
+                return;
+            }
+
+            int age = Integer.parseInt(ageInput);
+
             System.out.print("Digite o salário: ");
-            double salary = Scan.nextDouble();
+            String salaryInput = Scan.nextLine().strip();
+
+            if (salaryInput.isEmpty()) {
+                System.out.println("Operação cancelada.");
+                return;
+            }
+
+            double salary = Double.parseDouble(salaryInput);
+
             System.out.print("Digite os anos de experiência: ");
-            int employmentYears = Scan.nextInt();
+            String employmentYearsString = Scan.nextLine().strip();
+
+            if (employmentYearsString.isEmpty()) {
+                System.out.println("Operação cancelada.");
+                return;
+            }
+
+            int employmentYears = Integer.parseInt(employmentYearsString);
 
             Teacher newTeacher = new Teacher(name, age, salary, employmentYears);
             TeachersData.addTeacher(newTeacher);
@@ -229,71 +490,101 @@ public class DirectorActions {
      * Method to remove a teacher.
      * */
     public static void removeTeacher() {
+        try {
+            // Obter lista de professores
+            List<Teacher> teachers = TeachersData.getAllTeachers();
 
-        boolean opcaoValida = false;
+            // Exibindo a lista de professores com índices
+            listTeachers(teachers);
 
-        while (!opcaoValida) {
-            try {
-                // Obter lista de professores
-                List<Teacher> teachers = TeachersData.getAllTeachers();
-
-                // Exibindo a lista de professores com índices
-                listTeachers(teachers);
-
-                // Solicitar ao diretor que escolha o índice do professor a ser removido
-                System.out.print("Digite o índice do professor que deseja remover: ");
-                String input = Scan.nextLine();
-                int index = Integer.parseInt(input);
-
-                // Verificar se o índice é válido
-                if (index >= 1 && index <= teachers.size()) {
-                    // Remover o professor utilizando o método da classe TeachersData
-                    removeTeacherById(index - 1);
-                    opcaoValida = true; // Sai do loop se a opção for válida
-                } else {
-                    System.out.println("Índice inválido. Por favor, digite um índice da lista.");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Erro ao executar a ação. Por favor, insira um número válido.");
-            } catch (Exception e) {
-                System.out.println("Erro ao executar a ação. Tente novamente.");
+            if (teachers.isEmpty()) {
+                return;
             }
+
+            // Solicitar ao diretor que escolha o índice do professor a ser removido
+            System.out.print("Digite o índice do professor que deseja remover: ");
+            String input = Scan.nextLine().strip();
+
+            if (input.isEmpty()) {
+                return;
+            }
+
+            int index = Integer.parseInt(input) - 1;
+
+            // Verificar se o índice é válido
+            if (index >= 0 && index < teachers.size()) {
+                Teacher teacher = teachers.get(index);
+
+                ArrayList<Course> courses = CoursesData.getCoursesWithTeacher(teacher);
+                if (!courses.isEmpty()) {
+                    ArrayList<Course> allCourses = CoursesData.getAllCourses();
+
+                    ArrayList<Teacher> otherTeachers = new ArrayList<>(teachers);
+                    otherTeachers.remove(teacher);
+
+                    ArrayList<int[]> toReplace = new ArrayList<>();
+
+                    String teacherName = teacher.getName();
+                    for (Course course : courses) {
+                        String courseName = course.getName();
+
+                        listTeachers(otherTeachers);
+
+                        System.out.println(
+                            "Escolha outro professor para substituir " +
+                            teacherName + " no curso " + courseName + ":"
+                        );
+
+                        String indexString = Scan.nextLine().strip();
+
+                        if (indexString.isEmpty()) {
+                            System.out.println("Nenhum professor selecionado para substituir.");
+                            System.out.println("Remoção do professor cancelada.");
+                            return;
+                        }
+
+                        int replacementIndex = Integer.parseInt(indexString) - 1;
+
+                        if (replacementIndex >= 0 && replacementIndex < otherTeachers.size()) {
+                            Teacher replacementTeacher = otherTeachers.get(replacementIndex);
+
+                            int courseIndex = allCourses.indexOf(course);
+                            int teacherIndex = teachers.indexOf(replacementTeacher);
+
+                            toReplace.add(new int[]{courseIndex, teacherIndex});
+
+                            System.out.println(
+                                "Professor " + teacherName + " será substituido por " +
+                                replacementTeacher.getName() + " no curso " + courseName + "."
+                            );
+                        } else {
+                            System.out.println("ID inválido do professor.");
+                            System.out.println("Remoção do professor cancelada.");
+                            return;
+                        }
+                    }
+
+                    for (int[] ints : toReplace) {
+                        int courseIndex = ints[0];
+                        int teacherIndex = ints[1];
+
+                        Course course = allCourses.get(courseIndex);
+                        Teacher replacementTeacher = teachers.get(teacherIndex);
+
+                        course.setTeacher(replacementTeacher);
+                    }
+                }
+
+                TeachersData.removeTeacherById(index);
+                System.out.println("Professor " + teacher.getName() + " removido com sucesso.");
+            } else {
+                System.out.println("ID do professor inválido.");
+            }
+        } catch (Exception e) {
+            System.out.println("Não foi possível remover o professor.");
         }
     }
 
-    public static void addRemoveTeacher() {
-
-        boolean opcaoValida = false;
-        while (!opcaoValida) {
-            try {
-                System.out.println("*** Adicionar ou remover professor ***\n");
-                System.out.println("Escolha uma opção:");
-                System.out.println("1. Adicionar novo professor");
-                System.out.println("2. Remover professor existente");
-                System.out.println("0. Sair");
-                System.out.print("Opção: ");
-                String input = Scan.nextLine();
-                int option = Integer.parseInt(input);
-
-                if (option == 1) {
-                    addNewTeacher();
-                    opcaoValida = true;
-                } else if (option == 2) {
-                    removeTeacher();
-                    opcaoValida = true;
-                } else if (option == 0) {
-                    System.out.println("Saindo...");
-                    opcaoValida = true; // Saímos do loop
-                } else {
-                    System.out.println("Opção inválida. Por favor, escolha 0, 1 ou 2.");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Erro ao executar a ação. Por favor, insira um número válido.");
-            } catch (Exception e) {
-                System.out.println("Erro ao executar a ação. Tente novamente.");
-            }
-        }
-    }
     /*
      * Method to create a new Course. A registered Teacher is linked to the new Course
      * */
@@ -305,8 +596,8 @@ public class DirectorActions {
                 System.out.println("Nenhum professor cadastrado.");
                 System.out.println("Por favor, adicione um novo professor antes de criar um curso.");
                 System.out.print("Deseja adicionar um novo professor? (S/N)");
-                String option = Scan.next();
-                if (option.equalsIgnoreCase("S")) {
+                String option = Scan.next().strip().toLowerCase();
+                if (option.equals("s") || option.equals("sim")) {
                     addNewTeacher();
                     // Recarregar a lista de professores
                     teachers = TeachersData.getAllTeachers();
@@ -319,13 +610,27 @@ public class DirectorActions {
             System.out.print("Digite o nome do novo curso: ");
             String courseName = Scan.next();
 
+            if (courseName.isEmpty()) {
+                System.out.println("Não é permitido um curso com nome vazio.");
+                System.out.println("Operação cancelada.");
+                return;
+            }
+
             System.out.println("Lista de Professores Disponíveis:");
+
             for (int i = 0; i < teachers.size(); i++) {
                 System.out.println((i + 1) + ". " + teachers.get(i).getName());
             }
 
             System.out.print("Selecione o número do professor para este curso: ");
-            int selectedTeacherIndex = Scan.nextInt();
+            String teacherString = Scan.nextLine().strip();
+
+            if (teacherString.isEmpty()) {
+                System.out.println("Operação cancelada.");
+                return;
+            }
+
+            int selectedTeacherIndex = Integer.parseInt(teacherString);
 
             if (selectedTeacherIndex >= 1 && selectedTeacherIndex <= teachers.size()) {
                 Teacher selectedTeacher = teachers.get(selectedTeacherIndex - 1);
@@ -342,18 +647,80 @@ public class DirectorActions {
         }
     }
 
+    private static void removeCourse() {
+        try {
+            ArrayList<Course> courses = CoursesData.getAllCourses();
+            listCourses(courses);
+
+            if (courses.isEmpty()) {
+                return;
+            }
+
+            System.out.println("Selecione o curso a ser removido:");
+            System.out.println("(todas as turmas associadas serão removidas também)");
+
+            String indexString = Scan.nextLine().strip();
+
+            if (indexString.isEmpty()) {
+                return;
+            }
+
+            int courseIndex = Integer.parseInt(indexString) - 1;
+
+            if (courseIndex >= 0 && courseIndex < courses.size()) {
+                CoursesData.removeCourse(courseIndex);
+            } else {
+                System.out.println("ID do curso inválido.");
+            }
+        } catch (Exception e) {
+            System.out.println("Não foi possível remover o curso.");
+        }
+    }
+
     public static void addNewStudent() {
         // metodo duplicado na Main
         try {
             System.out.println("*** Cadastro do novo aluno ***\n");
             System.out.print("Digite o nome: ");
             String name = Scan.next();
+            if (name.isEmpty()) {
+                System.out.println("Não é permitido criar um aluno com nome vazio.");
+                System.out.println("Operação cancelada.");
+                return;
+            }
 
             System.out.print("Digite o e-mail: ");
             String email = Scan.next();
 
+            if (email.isEmpty()) {
+                System.out.println("Não é permitido aluno com e-mail vazio.");
+                System.out.println("Operação cancelada.");
+                return;
+            }
+
+            if (!Validations.validateEmail(email)) {
+                System.out.println("E-mail do aluno inválido.");
+                return;
+            }
+
+            if (!StudentsData.isEmailAdressAvailable(email)) {
+                System.out.println("E-mail já está cadastrado. Utilize um e-mail diferente.");
+                return;
+            }
+
+
             System.out.print("Digite o número de telefone: ");
-            String phoneNumber = Scan.next();
+            String phoneNumber = Scan.nextLine().strip();
+
+            if (!phoneNumber.isEmpty()) {
+                try {
+                    Validations.validatePhoneNumber(phoneNumber);
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Número de telefone inválido.");
+                    System.out.println("Operação cancelada.");
+                    return;
+                }
+            }
 
             Student newStudent = new Student(name, email, phoneNumber);
             StudentsData.addStudent(newStudent);
@@ -369,22 +736,25 @@ public class DirectorActions {
 
             // Listar todos os estudantes antes de remover
             List<Student> students = StudentsData.getAllStudents();
-            System.out.println("Lista de estudantes:");
-            for (int i = 0; i < students.size(); i++) {
-                Student student = students.get(i);
-                System.out.println("ID: " + (i + 1) + ", Nome: " + student.getName());
+            listStudents(students);
+
+            if (students.isEmpty()) {
+                return;
             }
 
             System.out.print("Digite o ID do aluno a ser removido (0 para cancelar): ");
-            int StudentId = Scan.nextInt();
 
-            if (StudentId == 0) {
-                return; // Cancelar a operação se o usuário digitar 0
+            String indexString = Scan.nextLine().strip();
+
+            if (indexString.isEmpty()) {
+                return;
             }
 
+            int studentIndex = Integer.parseInt(indexString) - 1;
+
             // Verificar se o índice do aluno é válido
-            if (StudentId > 0 && StudentId <= students.size()) {
-                StudentsData.removeStudent(StudentId); // Remover o aluno da lista
+            if (studentIndex >= 0 && studentIndex < students.size()) {
+                StudentsData.removeStudent(studentIndex); // Remover o aluno da lista
                 System.out.println("\nAluno removido com sucesso!");
             } else {
                 System.out.println("\nID do aluno inválido. Verifique e tente novamente.");
@@ -393,27 +763,6 @@ public class DirectorActions {
             System.out.println("\nNão foi possível remover o aluno! Tente novamente.");
         } finally {
             System.out.println("Voltando ao menu diretor!");
-        }
-    }
-
-    public static void addRemoveStudent() {
-        try {
-            System.out.println("*** Adicionar ou remover aluno ***\n");
-            System.out.println("Escolha uma opção:");
-            System.out.println("1. Adicionar novo aluno");
-            System.out.println("2. Remover aluno existente");
-            System.out.print("Opção: ");
-            int option = Scan.nextInt();
-
-            if (option == 1) {
-                addNewStudent();
-            } else if (option == 2) {
-                removeStudent();
-            } else {
-                System.out.println("Opção inválida. Por favor, escolha 1 ou 2.");
-            }
-        } catch (Exception e) {
-            System.out.println("Erro ao executar a ação. Tente novamente.");
         }
     }
 
@@ -436,18 +785,31 @@ public class DirectorActions {
             System.out.print("Digite o nome da nova turma: ");
             String className = Scan.next();
 
+            if (className.isEmpty()) {
+                System.out.println("Não é permitido criar uma turma com nome vazio.");
+                System.out.println("Operação cancelada.");
+                return;
+            }
+
             System.out.print("Digite o ano da turma: ");
-            int year = Scan.nextInt();
+            String yearString = Scan.nextLine().strip();
+
+            if (yearString.isEmpty()) {
+                System.out.println("Operação cancelada.");
+                return;
+            }
+
+            int year = Integer.parseInt(yearString);
 
             // Obter a lista de cursos disponíveis
-            List<Course> courses = CoursesData.getCoursesList();
+            List<Course> courses = CoursesData.getAllCourses();
 
             if (courses.isEmpty()) {
                 // Se não houver cursos cadastrados, pedir para criar um novo curso
                 System.out.print("\nNão há cursos cadastrados. Por favor, crie um novo curso.\n");
                 createNewCourse();
                 // Depois de criar um novo curso, recarregar a lista de cursos
-                courses = CoursesData.getCoursesList();
+                courses = CoursesData.getAllCourses();
             }
 
             if (!courses.isEmpty()) {
@@ -459,7 +821,14 @@ public class DirectorActions {
                 System.out.println("0. Criar um novo curso");
 
                 System.out.print("Selecione o número do curso para esta turma (ou 0 para criar um novo): ");
-                int selectedCourseIndex = Scan.nextInt();
+                String input = Scan.nextLine().strip();
+
+                if (input.isEmpty()) {
+                    System.out.println("Operação cancelada.");
+                    return;
+                }
+
+                int selectedCourseIndex = Integer.parseInt(input);
 
                 if (selectedCourseIndex == 0) {
                     // Criar um novo curso
@@ -479,6 +848,35 @@ public class DirectorActions {
             }
         } catch (Exception e) {
             System.out.println("\nErro ao criar a turma: " + e.getMessage());
+        }
+    }
+
+    private static void removeClass() {
+        try {
+            ArrayList<Class> classes = ClassesData.getAllClasses();
+            listClasses(classes);
+
+            if (classes.isEmpty()) {
+                return;
+            }
+
+            System.out.println("Selecione a turma a ser removida:");
+
+            String indexString = Scan.nextLine().strip();
+
+            if (indexString.isEmpty()) {
+                return;
+            }
+
+            int classIndex = Integer.parseInt(indexString) - 1;
+
+            if (classIndex >= 0 && classIndex < classes.size()) {
+                ClassesData.removeClass(classIndex);
+            } else {
+                System.out.println("ID da turma inválido.");
+            }
+        } catch (Exception e) {
+            System.out.println("Não foi possível remover a turma.");
         }
     }
 }
