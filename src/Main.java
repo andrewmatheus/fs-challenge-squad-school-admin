@@ -1,6 +1,8 @@
+import classes.Class;
 import classes.Director;
 import classes.Student;
 import classes.Teacher;
+import data.ClassesData;
 import data.DirectorsData;
 import data.StudentsData;
 import data.TeachersData;
@@ -8,6 +10,9 @@ import menu.DirectorActions;
 import menu.StudentActions;
 import menu.TeacherActions;
 import utils.Scan;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 import static utils.Validations.validateEmail;
 import static utils.Validations.validatePhoneNumber;
@@ -199,6 +204,39 @@ public class Main {
 
         Student newStudent = new Student(nameStudent, mail, phoneNumber);
         StudentsData.addStudent(newStudent);
+
+        System.out.println("Deseja selecionar uma turma para se matricular? (s/n)");
+
+        String input = Scan.nextLine().strip().toLowerCase();
+
+        try {
+            if (input.equals("s") || input.equals("sim")) {
+                System.out.println("Lista de turma:");
+                ArrayList<Class> classes = ClassesData.getAllClasses();
+                for (int i = 0; i < classes.size(); i++) {
+                    Class aClass = classes.get(i);
+                    int index = i + 1;
+
+                    System.out.println(index + ". " + aClass);
+                }
+                System.out.println("Selecione a turma que deseja se matricular:");
+
+                String classInput = Scan.nextLine();
+
+                if (!classInput.isEmpty()) {
+                    int classIndex = Integer.parseInt(classInput) - 1;
+                    Class aClass = classes.get(classIndex);
+
+                    aClass.addStudent(newStudent);
+
+                    System.out.println("Matriculado com sucesso na turma " + aClass.getName() + ".");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Não foi possível matriculá-lo a uma turma.");
+        } finally {
+            System.out.println("Novo aluno " + newStudent.getName() + " criado com sucesso.");
+        }
 
         return newStudent;
     }
