@@ -205,11 +205,11 @@ public class Main {
         Student newStudent = new Student(nameStudent, mail, phoneNumber);
         StudentsData.addStudent(newStudent);
 
-        System.out.println("Deseja selecionar uma turma para se matricular? (s/n)");
-
-        String input = Scan.nextLine().strip().toLowerCase();
-
         try {
+            System.out.println("Deseja selecionar uma turma para se matricular? (s/n)");
+
+            String input = Scan.nextLine().strip().toLowerCase();
+
             if (input.equals("s") || input.equals("sim")) {
                 System.out.println("Lista de turma:");
                 ArrayList<Class> classes = ClassesData.getAllClasses();
